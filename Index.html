@@ -1,29 +1,14 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="it">
 <head>
-  <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(registration => {
-          console.log('ServiceWorker registrato con successo con scope: ', registration.scope);
-        })
-        .catch(error => {
-          console.log('Registrazione ServiceWorker fallita: ', error);
-        });
-    });
-  }
-</script>
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Fitness con Valentina</title>
 
-  <link rel="manifest" href="./manifest.webmanifest">
   <!-- Collegamento al Manifest per Android, Chrome e Desktop -->
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#ffffff"> <!-- Sostituisci con il colore principale della tua app -->
+  <meta name="theme-color" content="#ffffff">
 
   <!-- Favicon standard e per browser desktop -->
   <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/fT1WP57j/FITNESS-CON-VALENTINA-icon.png">
@@ -44,8 +29,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-  
+
   <style>
     :root {
       --primary: #FF64AE;
@@ -58,32 +42,23 @@
       --radius-xl: 20px;
       --radius-lg: 14px;
     }
-@keyframes fitnessPulse {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.25);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.9);
-    opacity: 0.7;
-  }
-}
+    @keyframes fitnessPulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.25); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
 
-.fitness-loader {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #EDE9FE; /* Sfumatura leggera coordinata con il tema viola */
-  box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
-  animation: fitnessPulse 1.2s infinite ease-in-out;
-}
+    .fitness-loader {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #EDE9FE;
+      box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
+      animation: fitnessPulse 1.2s infinite ease-in-out;
+    }
     body {
       background-color: var(--bg-app);
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -156,7 +131,7 @@
 </head>
 <body>
 
-<div id="loading-overlay" >
+<div id="loading-overlay">
   <div class="text-center">
     <div class="fitness-loader mb-2">
       <i class="fa-solid fa-heart-pulse fa-2x" style="color: var(--primary);"></i>
@@ -177,10 +152,8 @@
 <div id="hero-banner-container" style="transition: all 0.3s ease;">
   <div class="hero-banner position-relative overflow-hidden shadow-sm mx-2 my-2 py-2 px-3 text-white text-center" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); border-radius: 14px;">
     
-    <!-- Luce morbida proporzionata -->
     <div class="position-absolute top-0 start-0 translate-middle rounded-circle bg-white opacity-15" style="width: 45px; height: 45px; filter: blur(10px);"></div>
 
-    <!-- Contenuto principale ridimensionato al 70% rispetto all'originale -->
     <div class="position-relative z-1 text-center">
       <div class="mb-1">
         <img src="https://lh3.googleusercontent.com/d/19mWr75g_T7vIdTxvgw7fCrXdsegJ7Fzl" alt="Fitness con Valentina" class="img-fluid" style="width: 100%; max-width: 90px; height: auto; object-fit: contain;">
@@ -207,52 +180,48 @@
 
 <div class="app-container mt-4">
   <ul class="nav nav-pills nav-pills-custom nav-justified" id="mainTab" role="tablist">
-  <li class="nav-item">
-    <button class="nav-link active" id="tab-btn-calendario" data-bs-toggle="pill" data-bs-target="#tab-calendario" type="button">
-      <i class="fa-regular fa-calendar-days me-1"></i> Calendario
-    </button>
-  </li>
-  <li class="nav-item">
-    <button class="nav-link" id="tab-btn-mie" data-bs-toggle="pill" data-bs-target="#tab-mie" type="button">
-      <i class="fa-solid fa-user-check me-1"></i> Le mie Lezioni
-    </button>
-  </li>
-  <? if (isIstruttore) { ?>
-  <li class="nav-item">
-    <button class="nav-link text-danger" id="tab-btn-istruttore" data-bs-toggle="pill" data-bs-target="#tab-istruttore" type="button">
-      <i class="fa-solid fa-lock me-1"></i> Istruttore
-    </button>
-  </li>
-  <? } ?>
-</ul>
+    <li class="nav-item">
+      <button class="nav-link active" id="tab-btn-calendario" data-bs-toggle="pill" data-bs-target="#tab-calendario" type="button">
+        <i class="fa-regular fa-calendar-days me-1"></i> Calendario
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" id="tab-btn-mie" data-bs-toggle="pill" data-bs-target="#tab-mie" type="button">
+        <i class="fa-solid fa-user-check me-1"></i> Le mie Lezioni
+      </button>
+    </li>
+    <? if (isIstruttore) { ?>
+    <li class="nav-item">
+      <button class="nav-link text-danger" id="tab-btn-istruttore" data-bs-toggle="pill" data-bs-target="#tab-istruttore" type="button">
+        <i class="fa-solid fa-lock me-1"></i> Istruttore
+      </button>
+    </li>
+    <? } ?>
+  </ul>
 
-<!-- Modale di Avviso Globale -->
-<!-- Modale di Avviso Dinamico (Ottimizzata per Smartphone) -->
-<div class="modal fade" id="global-alert" tabindex="-1" aria-labelledby="globalAlertLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content shadow-lg border-0 rounded-4 overflow-hidden">
-      
-      <!-- Header dinamico -->
-      <div id="global-alert-header" class="modal-header border-0 py-3 px-4 text-white">
-        <h5 class="modal-title fw-bold d-flex align-items-center gap-2" id="globalAlertLabel">
-          <span id="global-alert-icon">ℹ️</span> <span id="global-alert-title">Notifica</span>
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- Modale di Avviso Globale -->
+  <div class="modal fade" id="global-alert" tabindex="-1" aria-labelledby="globalAlertLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content shadow-lg border-0 rounded-4 overflow-hidden">
+        
+        <div id="global-alert-header" class="modal-header border-0 py-3 px-4 text-white">
+          <h5 class="modal-title fw-bold d-flex align-items-center gap-2" id="globalAlertLabel">
+            <span id="global-alert-icon">ℹ️</span> <span id="global-alert-title">Notifica</span>
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body fs-6 py-4 px-4 text-secondary" id="global-alert-msg">
+        </div>
+
+        <div class="modal-footer border-0 pt-0 pb-3 px-4">
+          <button type="button" id="global-alert-btn" class="btn w-100 py-2 fw-semibold rounded-3 text-white" data-bs-dismiss="modal">Capito</button>
+        </div>
+
       </div>
-
-      <!-- Corpo del messaggio -->
-      <div class="modal-body fs-6 py-4 px-4 text-secondary" id="global-alert-msg">
-        <!-- Il testo del messaggio viene inserito qui -->
-      </div>
-
-      <!-- Footer con pulsante a tutta larghezza ideale da mobile -->
-      <div class="modal-footer border-0 pt-0 pb-3 px-4">
-        <button type="button" id="global-alert-btn" class="btn w-100 py-2 fw-semibold rounded-3 text-white" data-bs-dismiss="modal">Capito</button>
-      </div>
-
     </div>
   </div>
-</div>
+
   <div class="tab-content w-100">
     <!-- CALENDARIO -->
     <div class="tab-pane fade show active w-100" id="tab-calendario" role="tabpanel">
@@ -272,9 +241,8 @@
     </div>
 
     <!-- LE MIE LEZIONI -->
-<div class="tab-pane fade w-100" id="tab-mie" role="tabpanel">
+    <div class="tab-pane fade w-100" id="tab-mie" role="tabpanel">
       <div class="card border-0 shadow-sm p-4 mx-auto col-12 col-md-8 col-lg-6" style="border-radius: var(--radius-xl); background: white;">
-        
         <div id="form-subtab-login">
           <h6 class="fw-bold mb-3 text-dark"><i class="fa-solid fa-magnifying-glass me-2 text-purple"></i>Cerca le tue Prenotazioni</h6>
           <div class="mb-3">
@@ -284,13 +252,12 @@
             <button class="btn btn-prenota w-100" onclick="cercaPrenotazioniUtente()">Cerca</button>
           </div>
         </div>
-        
         <div id="mie-prenotazioni-results"><p class="text-muted text-center small mb-0">Inserisci il tuo numero di telefono per verificare le lezioni.</p></div>
       </div>
     </div>
 
     <!-- AREA ISTRUTTORE -->
-<div class="tab-pane fade w-100" id="tab-istruttore" role="tabpanel">
+    <div class="tab-pane fade w-100" id="tab-istruttore" role="tabpanel">
       <div id="instr-auth-container" class="card border-0 shadow-sm p-4 mb-4 mx-auto col-12 col-md-6 col-lg-4" style="border-radius: var(--radius-xl); background: white;">
         <div class="text-center mb-3">
           <div class="mb-2"><i class="fa-solid fa-lock text-purple fa-2x"></i></div>
@@ -311,29 +278,28 @@
             <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="chiudiAreaIstruttore()"><i class="fa-solid fa-arrow-left me-1"></i> Esci</button>
           </div>
 
-          <!-- BARRA DI NAVIGAZIONE TAB (AGGIUNTO IMPOSTAZIONI) -->
-        <ul class="nav nav-pills nav-fill mb-4 gap-2" role="tablist">
-  <li class="nav-item">
-    <button class="nav-link active small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-lezioni" type="button">
-      <i class="fa-solid fa-calendar-days me-1"></i>Lezioni
-    </button>
-  </li>
-  <li class="nav-item">
-    <button class="nav-link small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-utenti" type="button">
-      <i class="fa-solid fa-users me-1"></i>Utenti
-    </button>
-  </li>
-  <li class="nav-item">
-    <button class="nav-link small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-listini" type="button">
-      <i class="fa-solid fa-tags me-1"></i>Categorie
-    </button>
-  </li>
-  <li class="nav-item">
-    <button class="nav-link small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-impostazioni" type="button">
-      <i class="fa-solid fa-gear me-1"></i>Impostazioni
-    </button>
-  </li>
-</ul>
+          <ul class="nav nav-pills nav-fill mb-4 gap-2" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-lezioni" type="button">
+                <i class="fa-solid fa-calendar-days me-1"></i>Lezioni
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-utenti" type="button">
+                <i class="fa-solid fa-users me-1"></i>Utenti
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-listini" type="button">
+                <i class="fa-solid fa-tags me-1"></i>Categorie
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link small fw-bold" data-bs-toggle="pill" data-bs-target="#instr-sub-impostazioni" type="button">
+                <i class="fa-solid fa-gear me-1"></i>Impostazioni
+              </button>
+            </li>
+          </ul>
 
           <div class="tab-content w-100">
             <!-- LEZIONI -->
@@ -345,32 +311,6 @@
               <div id="instr-lista-lezioni" class="w-100"></div>
             </div>
 
-     <!-- Modale per la scelta dell'utente con crediti disponibili -->
-            <div class="modal fade" id="modalAggiungiUtenteIstruttore" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-0 shadow" style="border-radius: 12px;">
-                  <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold text-dark" style="font-size: 16px;">Aggiungi Utente alla Lezione</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <p class="text-muted small mb-3">Vengono mostrati solo gli utenti che hanno un pacchetto attivo con crediti residui per la categoria: <strong id="lbl-categoria-lezione" class="text-primary"></strong></p>
-                    
-                    <div class="mb-3">
-                      <label class="form-label small fw-bold text-muted">Seleziona Utente</label>
-                      <select class="form-select form-control-custom" id="select-utenti-crediti">
-                        <option value="">Caricamento...</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="modal-footer border-0 pt-0">
-                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Annulla</button>
-                    <button type="button" class="btn btn-sm btn-primary" onclick="confermaAggiuntaUtenteIstruttore()" style="background-color: #FF64AE; border: none;">Conferma e Scala Credito</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <!-- UTENTI -->
             <div class="tab-pane fade w-100" id="instr-sub-utenti" role="tabpanel">
               <div class="d-flex justify-content-between align-items-center mb-3">
@@ -378,73 +318,6 @@
                 <button class="btn btn-sm btn-success rounded-pill px-3" onclick="preparaNuovoUtente()"><i class="fa-solid fa-user-plus me-1"></i> Aggiungi Utente</button>
               </div>
               <div id="instr-lista-utenti" class="w-100"></div>
-            </div>
-
-            <div class="modal fade" id="modalNuovoUtenteCompleto" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content" style="border-radius: 16px;">
-                  <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title"><i class="fa-solid fa-user-plus me-2"></i>Nuovo Utente e Pacchetti</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form id="form-nuovo-utente-completo">
-                      <!-- Sezione Anagrafica -->
-                      <h6 class="text-success fw-bold mb-3">1. Dati Anagrafici</h6>
-                      <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                          <label class="form-label small text-muted">Nome</label>
-                          <input type="text" class="form-control" id="new-user-nome" required>
-                        </div>
-                        <div class="col-md-6">
-                          <label class="form-label small text-muted">Cognome</label>
-                          <input type="text" class="form-control" id="new-user-cognome" required>
-                        </div>
-                        <div class="col-md-6">
-                          <label class="form-label small text-muted">Telefono</label>
-                          <input type="text" class="form-control" id="new-user-telefono">
-                        </div>
-                        <div class="col-md-6">
-                          <label class="form-label small text-muted">Email</label>
-                          <input type="email" class="form-control" id="new-user-email">
-                        </div>
-                      </div>
-
-                      <hr>
-
-                      <!-- Sezione Gestione Pacchetti / Categorie Iniziali -->
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="text-success fw-bold m-0">2. Pacchetti Iniziali (Opzionali)</h6>
-                        <button type="button" class="btn btn-sm btn-outline-success" onclick="aggiungiRigaCategoriaNuovoModal()">
-                          <i class="fa-solid fa-plus me-1"></i> Aggiungi Categoria
-                        </button>
-                      </div>
-                      
-                      <div id="container-categorie-nuovo" class="table-responsive mb-3">
-                        <table class="table table-sm align-middle">
-                          <thead class="table-light">
-                            <tr>
-                              <th>Categoria</th>
-                              <th style="width: 110px;">Acquistate</th>
-                              <th style="width: 110px;">Utilizzate</th>
-                              <th style="width: 110px;">Da Saldare</th>
-                              <th style="width: 50px;"></th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbody-categorie-nuovo-edit">
-                            <!-- Verrà popolato dinamicamente -->
-                          </tbody>
-                        </table>
-                      </div>
-
-                      <div class="text-end">
-                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Annulla</button>
-                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-save me-1"></i> Registra Utente</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <!-- LISTINI & CATEGORIE -->
@@ -456,48 +329,46 @@
               <div id="instr-lista-listini" class="w-100"></div>
             </div>
 
-            <!-- IMPOSTAZIONI (NUOVO TAB) -->
-<div class="tab-pane fade w-100" id="instr-sub-impostazioni" role="tabpanel">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h6 class="fw-bold mb-0"><i class="fa-solid fa-gear me-2"></i>Impostazioni Applicazione</h6>
-  </div>
-  <div class="p-3 border rounded bg-white shadow-sm">
-    <p class="text-muted small mb-3">Da qui puoi configurare i parametri generali dell'app o gestire opzioni avanzate.</p>
-    <div id="instr-contenuto-impostazioni">
-      
-      <!-- Toggle per le Notifiche Email -->
-      <div class="form-check form-switch d-flex justify-content-between align-items-center ps-0 py-2">
-        <div>
-          <label class="form-check-label fw-bold text-dark mb-0" for="toggleEmailAcquisto" style="cursor: pointer;">
-            <i class="fa-solid fa-envelope-circle-check text-primary me-2"></i>Notifica Email Acquisto
-          </label>
-          <div class="text-muted small" style="font-size: 12px;">Invia un'email automatica all'utente quando acquista un pacchetto.</div>
-        </div>
-        <input class="form-check-input ms-3" type="checkbox" role="switch" id="toggleEmailAcquisto" checked style="width: 3rem; height: 1.5rem; cursor: pointer;" onchange="cambiaStatoNotificheEmail(this)">
-      </div>
+            <!-- IMPOSTAZIONI -->
+            <div class="tab-pane fade w-100" id="instr-sub-impostazioni" role="tabpanel">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-bold mb-0"><i class="fa-solid fa-gear me-2"></i>Impostazioni Applicazione</h6>
+              </div>
+              <div class="p-3 border rounded bg-white shadow-sm">
+                <p class="text-muted small mb-3">Da qui puoi configurare i parametri generali dell'app o gestire opzioni avanzate.</p>
+                <div id="instr-contenuto-impostazioni">
+                  
+                  <div class="form-check form-switch d-flex justify-content-between align-items-center ps-0 py-2">
+                    <div>
+                      <label class="form-check-label fw-bold text-dark mb-0" for="toggleEmailAcquisto" style="cursor: pointer;">
+                        <i class="fa-solid fa-envelope-circle-check text-primary me-2"></i>Notifica Email Acquisto
+                      </label>
+                      <div class="text-muted small" style="font-size: 12px;">Invia un'email automatica all'utente quando acquista un pacchetto.</div>
+                    </div>
+                    <input class="form-check-input ms-3" type="checkbox" role="switch" id="toggleEmailAcquisto" checked style="width: 3rem; height: 1.5rem; cursor: pointer;" onchange="cambiaStatoNotificheEmail(this)">
+                  </div>
 
-      <hr class="my-4">
+                  <hr class="my-4">
 
-      <!-- Sezione Modifica Password -->
-      <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-key me-2"></i>Modifica Password Istruttore</h6>
+                  <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-key me-2"></i>Modifica Password Istruttore</h6>
 
-      <div class="mb-3">
-        <label class="form-label small text-muted">Vecchia Password</label>
-        <input type="password" id="settings-old-pass" class="form-control form-control-custom" placeholder="Inserisci vecchia password...">
-      </div>
+                  <div class="mb-3">
+                    <label class="form-label small text-muted">Vecchia Password</label>
+                    <input type="password" id="settings-old-pass" class="form-control form-control-custom" placeholder="Inserisci vecchia password...">
+                  </div>
 
-      <div class="mb-3">
-        <label class="form-label small text-muted">Nuova Password</label>
-        <input type="password" id="settings-new-pass" class="form-control form-control-custom" placeholder="Inserisci nuova password...">
-      </div>
+                  <div class="mb-3">
+                    <label class="form-label small text-muted">Nuova Password</label>
+                    <input type="password" id="settings-new-pass" class="form-control form-control-custom" placeholder="Inserisci nuova password...">
+                  </div>
 
-      <button class="btn btn-sm btn-primary px-4" type="button" onclick="eseguiCambioPassword()">Aggiorna Password</button>
+                  <button class="btn btn-sm btn-primary px-4" type="button" onclick="eseguiCambioPassword()">Aggiorna Password</button>
 
-      <div id="settings-pass-msg" class="small mt-2" style="display: none;"></div>
+                  <div id="settings-pass-msg" class="small mt-2" style="display: none;"></div>
 
-    </div>
-  </div>
-</div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -561,7 +432,6 @@
       </div>
       <div class="modal-body">
         
-        <!-- Avviso crediti esauriti -->
         <div class="alert alert-warning d-flex align-items-center mb-3 p-2 small" role="alert">
           <i class="fa-solid fa-triangle-exclamation fa-lg me-2 text-warning"></i>
           <div>
@@ -570,16 +440,12 @@
         </div>
 
         <form id="form-acquisto">
-          <!-- Campi nascosti: categoria e telefono passati in automatico senza chiedere nome e cognome -->
           <input type="hidden" id="acq-categoria">
           <input type="hidden" id="acq-telefono">
 
-          <!-- Selezione Pacchetti Visiva (Card affiancate o a blocco) -->
           <div class="mb-3">
             <label class="form-label small fw-bold text-muted mb-2">Scegli il tuo pacchetto:</label>
-            <div id="pacchetti-cards-container" class="d-flex flex-column gap-2">
-              <!-- Verrà popolato dinamicamente via JS mostrando i 3 pacchetti come pulsanti/card -->
-            </div>
+            <div id="pacchetti-cards-container" class="d-flex flex-column gap-2"></div>
           </div>
 
           <button type="submit" class="btn btn-prenota w-100">Conferma e Procedi</button>
@@ -601,11 +467,11 @@
           <input type="hidden" id="edit-lez-riga">
           <div class="mb-2"><label class="form-label small fw-bold text-muted">Nome Lezione</label><input type="text" class="form-control form-control-custom" id="edit-lez-nome" required></div>
           <div class="mb-2">
-  <label class="form-label small fw-bold text-muted">Categoria</label>
-  <select class="form-select form-control-custom" id="edit-lez-cat" required>
-    <option value="">-- Seleziona Categoria --</option>
-  </select>
-</div>
+            <label class="form-label small fw-bold text-muted">Categoria</label>
+            <select class="form-select form-control-custom" id="edit-lez-cat" required>
+              <option value="">-- Seleziona Categoria --</option>
+            </select>
+          </div>
           <div class="mb-2"><label class="form-label small fw-bold text-muted">Data</label><input type="date" class="form-control form-control-custom" id="edit-lez-data" required></div>
           <div class="row g-2 mb-2">
             <div class="col-6"><label class="form-label small fw-bold text-muted">Ora Inizio</label><input type="time" class="form-control form-control-custom" id="edit-lez-orain" required></div>
@@ -643,8 +509,8 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="modalModificaUtenteCompleta" tabindex="-1" aria-hidden="true">
-  <!-- Aggiunto modal-dialog-centered per una migliore UX su mobile -->
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
       <div class="modal-header text-white px-4 py-3" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%);">
@@ -657,10 +523,8 @@
         <form id="form-modifica-utente-completo">
           <input type="hidden" id="edit-user-rowindex">
           
-          <!-- Sezione Anagrafica -->
           <h6 class="fw-bold mb-3" style="color: #FF64AE;">1. Dati Anagrafici</h6>
           
-          <!-- Usiamo col-12 per mobile e col-md-6 da tablet in sù -->
           <div class="row g-3 mb-4">
             <div class="col-12 col-md-6">
               <label class="form-label small fw-semibold text-muted">Nome</label>
@@ -682,7 +546,6 @@
 
           <hr class="text-muted opacity-25">
 
-          <!-- Sezione Gestione Pacchetti / Categorie -->
           <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-3">
             <h6 class="fw-bold m-0" style="color: #FF64AE;">2. Gestione Pacchetti per Categoria</h6>
             <button type="button" class="btn btn-sm btn-outline-success rounded-pill px-3 py-2" onclick="aggiungiRigaCategoriaModal()">
@@ -690,12 +553,8 @@
             </button>
           </div>
           
-          <!-- Contenitore tabella fluido e sicuro per smartphone -->
-          <div id="container-categorie-utente" class="table-responsive mb-4 border rounded-3 p-2 bg-light">
-            <!-- Verrà popolato dinamicamente via JS -->
-          </div>
+          <div id="container-categorie-utente" class="table-responsive mb-4 border rounded-3 p-2 bg-light"></div>
 
-          <!-- Pulsanti finali a tutta larghezza su mobile -->
           <div class="d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 pt-2">
             <button type="button" class="btn btn-light rounded-pill px-4 py-2 text-muted fw-bold" data-bs-dismiss="modal">Annulla</button>
             <button type="submit" class="btn rounded-pill px-4 py-2 text-white fw-bold shadow-sm" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); border: none;">
@@ -708,7 +567,6 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="editListinoModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow" style="border-radius: var(--radius-xl);">
@@ -720,31 +578,26 @@
         <form id="form-edit-listino">
           <input type="hidden" id="edit-list-riga">
           
-          <!-- Nome Categoria -->
           <div class="mb-3">
             <label class="form-label small fw-bold text-muted">Categoria Lezione</label>
             <input type="text" class="form-control form-control-custom" id="edit-list-cat" required>
           </div>
 
-          <!-- Intestazioni Colonne -->
           <div class="row g-2 mb-1 px-1">
             <div class="col-6"><small class="fw-bold text-primary">Numero Lezioni</small></div>
             <div class="col-6"><small class="fw-bold text-success">Prezzo (€)</small></div>
           </div>
 
-          <!-- Pacchetto 1 -->
           <div class="row g-2 mb-2">
             <div class="col-6"><input type="number" class="form-control form-control-custom" id="edit-list-p1num" placeholder="Es. 5"></div>
             <div class="col-6"><input type="number" step="0.01" class="form-control form-control-custom" id="edit-list-p1pr" placeholder="Es. 50"></div>
           </div>
 
-          <!-- Pacchetto 2 -->
           <div class="row g-2 mb-2">
             <div class="col-6"><input type="number" class="form-control form-control-custom" id="edit-list-p2num" placeholder="Es. 10"></div>
             <div class="col-6"><input type="number" step="0.01" class="form-control form-control-custom" id="edit-list-p2pr" placeholder="Es. 90"></div>
           </div>
 
-          <!-- Pacchetto 3 -->
           <div class="row g-2 mb-3">
             <div class="col-6"><input type="number" class="form-control form-control-custom" id="edit-list-p3num" placeholder="Es. 20"></div>
             <div class="col-6"><input type="number" step="0.01" class="form-control form-control-custom" id="edit-list-p3pr" placeholder="Es. 160"></div>
@@ -763,2099 +616,16 @@
   let tutteLezioni = [];
   let currentWeekStartDate = getMonday(new Date());
   let selectedDateIso = null;
+  let listiniMappa = {};
 
- let listiniMappa = {}; // Dichiara la variabile globale per i listini
-
-window.onload = function() {
+  window.onload = function() {
     prenotazioneModalObj = new bootstrap.Modal(document.getElementById('prenotazioneModal'));
     registrationModalObj = new bootstrap.Modal(document.getElementById('registrazioneModal'));
     acquistoModalObj = new bootstrap.Modal(document.getElementById('acquistoModal'));
     editLezioneModalObj = new bootstrap.Modal(document.getElementById('editLezioneModal'));
     editUtenteModalObj = new bootstrap.Modal(document.getElementById('editUtenteModal'));
     editListinoModalObj = new bootstrap.Modal(document.getElementById('editListinoModal'));
-    
-    // Carica prima i listini dal server, poi popola le lezioni
-    google.script.run.withSuccessHandler(function(mappa) {
-        listiniMappa = mappa || {};
-        caricaLezioniServer();
-    }).withFailureHandler(function(err) {
-        console.error("Errore nel caricamento dei listini:", err);
-        caricaLezioniServer(); // Prova comunque a caricare le lezioni
-    }).getListiniMappa();
-};
-
-  function showLoading(text = "Attendere...") {
-    document.getElementById('loading-text').innerText = text;
-    document.getElementById('loading-overlay').classList.remove('d-none');
-  }
-  function hideLoading() {
-    document.getElementById('loading-overlay').classList.add('d-none');
-  }
-
-  function callServer(methodName, successCallback, ...args) {
-    showLoading();
-    google.script.run
-      .withSuccessHandler(res => { hideLoading(); if (successCallback) successCallback(res); })
-      .withFailureHandler(err => { hideLoading(); alert("Errore: " + (err.message || err)); })
-      [methodName](...args);
-  }
-
-function verificaPasswordIstruttore() {
-  const input = document.getElementById('instr-password-input');
-  const passwordInserita = input.value;
-
-  google.script.run
-    .withSuccessHandler(function(corretta) {
-      if (corretta) {
-        document.getElementById('instr-auth-container').style.display = 'none';
-        document.getElementById('instr-protected-content').style.display = 'block';
-        document.getElementById('instr-auth-error').style.display = 'none';
-        input.value = '';
-        caricaDatiIstruttore();
-      } else {
-        document.getElementById('instr-auth-error').style.display = 'block';
-        input.value = '';
-      }
-    })
-    .verificaPasswordServer(passwordInserita);
-}
-
-  function chiudiAreaIstruttore() {
-    bootstrap.Tab.getOrCreateInstance(document.querySelector('#tab-btn-calendario')).show();
-  }
-
-  function caricaDatiIstruttore() {
-    caricaLezioniIstruttore();
-    caricaSelectLezioniIstruttore();
-    caricaUtentiIstruttore();
-    caricaListiniIstruttore();
-  }
-
-// 1. Carica le categorie all'avvio della sezione acquisto
-function inizializzaSezioneAcquisto() {
-  google.script.run.withSuccessHandler(function(categorie) {
-    const selectCat = document.getElementById('acquisto-cat');
-    selectCat.innerHTML = '<option value="">-- Seleziona Categoria --</option>';
-    
-    categorie.forEach(cat => {
-      selectCat.innerHTML += `<option value="${cat}">${cat}</option>`;
-    });
-    
-    // Resetta la select dei pacchetti
-    document.getElementById('acquisto-pacchetto').innerHTML = '<option value="">-- Prima seleziona una categoria --</option>';
-  }).getCategorieListino();
-}
-
-// Funzione da chiamare quando apri la modale di acquisto
-function apriAcquistoModal() {
-  // Pulisci il container delle card dei pacchetti (se serve)
-  const container = document.getElementById('pacchetti-cards-container');
-  if (container) {
-    container.innerHTML = '<div class="text-muted small text-center py-2">Caricamento pacchetti...</div>';
-  }
-
-  // Mostra la modale di Bootstrap in modo sicuro
-  if (typeof acquistoModalObj !== 'undefined' && acquistoModalObj) {
-    acquistoModalObj.show();
-  } else {
-    // Fallback se l'oggetto globale non è definito
-    const modalEl = document.getElementById('acquistoModal');
-    if (modalEl) {
-      const bsModal = new bootstrap.Modal(modalEl);
-      bsModal.show();
-    }
-  }
-}
-
-// Quando sposti l'interruttore
-function cambiaStatoNotificheEmail(elemento) {
-  var attivo = elemento.checked;
-  google.script.run
-    .withSuccessHandler(function() {
-      console.log("Preferenza notifiche aggiornata: " + attivo);
-    })
-    .salvaStatoNotificheEmail(attivo);
-}
-
-// Quando si carica la pagina (da inserire dentro la funzione di inizializzazione o window.onload)
-function caricaStatoImpostazioniEmail() {
-  google.script.run
-    .withSuccessHandler(function(attivo) {
-      var toggle = document.getElementById('toggleEmailAcquisto');
-      if (toggle) {
-        toggle.checked = attivo;
-      }
-    })
-    .getStatoNotificheEmail();
-}
-
-// Esegui la lettura dello stato all'apertura dell'app
-document.addEventListener("DOMContentLoaded", function() {
-  caricaStatoImpostazioniEmail();
-});
-
-// Funzione che scatta quando l'utente seleziona una categoria nel form di acquisto
-function caricaPacchettiAcquisto() {
-  const selectCat = document.getElementById('acq-categoria');
-  const selectPacchetto = document.getElementById('acq-num');
-  
-  if (!selectCat || !selectPacchetto) return;
-  
-  const categoriaScelta = selectCat.value;
-  selectPacchetto.innerHTML = '<option value="">Caricamento pacchetti...</option>';
-  
-  if (!categoriaScelta) {
-    selectPacchetto.innerHTML = '<option value="">-- Prima seleziona una categoria --</option>';
-    return;
-  }
-  
-  // Chiama la funzione lato server aggiornata
-  google.script.run.withSuccessHandler(function(pacchetti) {
-    selectPacchetto.innerHTML = '<option value="">-- Seleziona Pacchetto e Prezzo --</option>';
-    
-    if (!pacchetti || pacchetti.length === 0) {
-      selectPacchetto.innerHTML = '<option value="">Nessun pacchetto trovato</option>';
-      return;
-    }
-    
-    pacchetti.forEach(item => {
-      // Formatta la scritta visibile nel menu a tendina
-      let testoOpzione = `${item.numLezioni} Lezioni - Prezzo: €${item.prezzo}`;
-      
-      // Come valore (value) dell'opzione passiamo direttamente il numero di lezioni (o il prezzo, a seconda di cosa ti serve registrare)
-      // Qui passiamo item.numLezioni perché il tuo form salva il numero di lezioni del pacchetto acquistato
-      selectPacchetto.innerHTML += `<option value="${item.numLezioni}">${testoOpzione}</option>`;
-    });
-  }).getPacchettiPerCategoria(categoriaScelta);
-}
-  // --- PRENOTAZIONI & UTENTI ---
-function apriModalPrenotazione(idLezione, nomeLez, dataLez, oraLez) {
-  document.getElementById('modal-lezione-riga').value = idLezione;
-  document.getElementById('modal-lezione-titolo').innerText = `Prenota: ${nomeLez} (${dataLez} ore ${oraLez})`;
-  
-  // Pulisci il campo telefono invece di nome e cognome
-  const inputTelefono = document.getElementById('pren-telefono');
-  if (inputTelefono) {
-    inputTelefono.value = '';
-  }
-  
-  // Mostra il modal in sicurezza
-  if (typeof prenotazioneModalObj !== 'undefined' && prenotazioneModalObj) {
-    prenotazioneModalObj.show();
-  }
-}
-
-document.getElementById('form-prenotazione').onsubmit = function(e) {
-  e.preventDefault();
-  const telefono = document.getElementById('pren-telefono').value.trim();
-  const idLezioneOrRiga = document.getElementById('modal-lezione-riga').value;
-
-  callServer('prenotaLezione', res => {
-    // Chiudiamo la modale di prenotazione in modo sicuro
-    if (typeof prenotazioneModalObj !== 'undefined' && prenotazioneModalObj) {
-      prenotazioneModalObj.hide();
-    } else if (typeof prenotaModalObj !== 'undefined' && prenotaModalObj) {
-      prenotaModalObj.hide();
-    }
-
-    if (res.success) {
-      showGlobalAlert('success', res.message);
-      if (typeof caricaLezioniServer === 'function') caricaLezioniServer();
-      
-    } else if (res.code === "UTENTE_NON_REGISTRATO") {
-      showGlobalAlert('danger', `⚠️ ${res.message} Contattare l'istruttore.`);
-      
-      const regTelefono = document.getElementById('reg-tab-telefono') || document.getElementById('reg-telefono');
-      if (regTelefono) regTelefono.value = telefono;
-      
-      setTimeout(() => {
-        if (typeof switchSubTabMie === 'function') switchSubTabMie('register');
-        const tabMie = document.getElementById('tab-mie');
-        if (tabMie) tabMie.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 1500);
-
-    } else if (res.code === "CREDITI_ESAURITI") {
-      // SALVIAMO LA LEZIONE IN SOSPESO PER RIPRENDERla DOPO L'ACQUISTO
-      sessionStorage.setItem('lezioneInSospesoId', idLezioneOrRiga);
-      
-      const acqTelefono = document.getElementById('acq-telefono');
-      const acqCat = document.getElementById('acq-categoria');
-      
-      if (acqTelefono) acqTelefono.value = res.telefono || telefono;
-      if (acqCat && res.categoria) acqCat.value = res.categoria;
-      
-      setTimeout(() => {
-        if (typeof apriAcquistoModal === 'function') {
-          apriAcquistoModal();
-        }
-        
-        // Se abbiamo la categoria, estraiamo i pacchetti e li mostriamo come card visive
-        if (res.categoria) {
-          const pacchettiCategoria = (typeof listiniMappa !== 'undefined' && listiniMappa[res.categoria]) 
-            ? listiniMappa[res.categoria] 
-            : null;
-          
-          if (pacchettiCategoria) {
-            popolaPacchettiVisivi(pacchettiCategoria);
-          } else {
-            // Se la mappa globale non è pronta, chiediamo i listini al server
-            callServer('getConfigurazioneListiniPerCategoria', p => {
-              popolaPacchettiVisivi(p);
-            }, res.categoria);
-          }
-        }
-      }, 1200);
-
-    } else {
-      showGlobalAlert('danger', res.message);
-    }
-  }, idLezioneOrRiga, telefono);
-};
-
-  document.getElementById('form-registrazione').onsubmit = function(e) {
-    e.preventDefault();
-    const nome = document.getElementById('reg-nome').value;
-    const cognome = document.getElementById('reg-cognome').value;
-    const tel = document.getElementById('reg-telefono').value;
-    const email = document.getElementById('reg-email').value;
-    const rigaLezione = document.getElementById('reg-lezione-riga').value;
-
-    callServer('registraENuovoUtente', res => {
-      registrationModalObj.hide();
-      if (res.success) {
-        showGlobalAlert('success', res.message);
-        caricaLezioniServer();
-      } else {
-        showGlobalAlert('danger', res.message);
-      }
-    }, nome, cognome, tel, email, rigaLezione);
   };
-
-function cercaPrenotazioniUtente() {
-  let telefonoInput = document.getElementById('search-telefono').value.trim();
-  const container = document.getElementById('mie-prenotazioni-results');
-
-  if (!telefonoInput) {
-    container.innerHTML = '<p class="text-danger small text-center mb-0">Inserisci il numero di telefono.</p>';
-    return;
-  }
-
-  // --- PULIZIA DEL NUMERO DI TELEFONO ---
-  // 1. Rimuove eventuali spazi, trattini o parentesi (es. "+39 333-1234567" diventa "+393331234567")
-  let telefonoPulito = telefonoInput.replace(/[\s\-\(\)]/g, '');
-
-  // 2. Se inizia con "+39", lo rimuove
-  if (telefonoPulito.startsWith('+39')) {
-    telefonoPulito = telefonoPulito.substring(3);
-  }
-  // 3. Se inizia con "0039", lo rimuove
-  else if (telefonoPulito.startsWith('0039')) {
-    telefonoPulito = telefonoPulito.substring(4);
-  }
-  // -------------------------------------
-
-  // Ora inviamo al server il numero "pulito" (es. solo le cifre locali, es. "3331234567")
-  callServer('getPrenotazioniUtente', res => {
-    container.innerHTML = '';
-    if (!res || !res.utenteTrovato) {
-      container.innerHTML = '<p class="text-danger small text-center mb-0">Utente non trovato.</p>';
-      return;
-    }
-
-    let html = '<h6 class="fw-bold mt-2 text-dark small">Riepilogo Acquisti per Categoria:</h6>';
-    if (!res.riepilogoAcquisti || res.riepilogoAcquisti.length === 0) {
-      html += '<p class="text-muted small">Nessun pacchetto attivo.</p>';
-    } else {
-      res.riepilogoAcquisti.forEach(acq => {
-        html += `<div class="p-2 mb-1 border rounded bg-light small">
-          <strong>${acq.categoria}:</strong> ${acq.rimanenti} crediti rimanenti (${acq.utilizzate} usate su ${acq.acquistate}) | Da saldare: ${acq.daSaldare}
-        </div>`;
-      });
-    }
-
-    html += '<h6 class="fw-bold mt-3 text-dark small">Le tue Prenotazioni:</h6>';
-    if (!res.prenotazioni || res.prenotazioni.length === 0) {
-      html += '<p class="text-muted small">Nessuna prenotazione attiva.</p>';
-    } else {
-      res.prenotazioni.forEach(p => {
-        html += `<div class="d-flex justify-content-between align-items-center p-2 mb-2 border rounded bg-white shadow-sm">
-          <div>
-            <strong class="text-dark small">${p.lezione} <span class="badge bg-light text-primary border">${p.categoria}</span></strong>
-            <div class="text-muted" style="font-size: 0.75rem;">${p.data} (${p.oraInizio}) - ${p.luogo}</div>
-          </div>
-          <button class="btn btn-sm btn-outline-danger rounded-pill px-2" style="font-size: 0.75rem;" onclick="cancellaMiaprenotazione('${p.idPrenotazione}')">Cancella</button>
-        </div>`;
-      });
-    }
-    container.innerHTML = html;
-  }, telefonoPulito); // <--- Passiamo il telefono pulito alla funzione del server
-}
-
-function cancellaMiaprenotazione(idPrenotazione) {
-  // Rimuoviamo eventuali modali di conferma precedenti per evitare duplicati nel DOM
-  const oldModal = document.getElementById('customConfirmModal');
-  if (oldModal) oldModal.remove();
-
-  // Creiamo dinamicamente la struttura HTML del modale
-  const modalHtml = `
-    <div class="modal fade" id="customConfirmModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-          <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-            <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-              <i class="fa-solid fa-triangle-exclamation me-2"></i>Conferma Cancellazione
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4 text-center">
-            <div class="mb-3">
-              <i class="fa-regular fa-calendar-xmark text-danger" style="font-size: 3rem;"></i>
-            </div>
-            <p class="text-dark fw-semibold mb-1" style="font-size: 1rem;">Sei sicuro di voler cancellare questa prenotazione?</p>
-            <p class="text-muted small mb-0">L'operazione rimborserà automaticamente il credito nel tuo profilo.</p>
-          </div>
-          <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-center gap-2">
-            <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal" style="font-size: 0.9rem;">Annulla</button>
-            <button type="button" id="btnConfirmDelete" class="btn rounded-pill px-4 fw-bold text-white" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); font-size: 0.9rem; border: none;">Sì, cancella</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Iniettiamo il modale nel body
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const modalElement = document.getElementById('customConfirmModal');
-  const bootstrapModal = new bootstrap.Modal(modalElement);
-  bootstrapModal.show();
-
-  // Gestione del click sul pulsante di conferma effettivo
-  document.getElementById('btnConfirmDelete').onclick = function() {
-    bootstrapModal.hide();
-    
-    // Mostriamo l'indicatore di caricamento globale se presente
-    if (typeof showLoading === 'function') showLoading("Cancellazione in corso...");
-
-    // Passiamo l'idPrenotazione al server
-    callServer('cancellaPrenotazione', res => {
-      if (typeof hideLoading === 'function') hideLoading();
-
-      if (res && res.success) {
-        // Feedback visivo in stile con l'app
-        if (typeof showGlobalAlert === 'function') {
-          try {
-            showGlobalAlert('success', res.message);
-          } catch (e) {
-            alert(res.message);
-          }
-        } else {
-          alert(res.message);
-        }
-
-        // Aggiorna le viste aperte
-        if (typeof cercaPrenotazioniUtente === 'function') cercaPrenotazioniUtente();
-        if (typeof caricaLezioniServer === 'function') caricaLezioniServer();
-        
-      } else {
-        // Intercetta l'errore (incluso il blocco per lezioni passate restituito dal server)
-        const msg = res && res.message ? res.message : "Errore durante la cancellazione.";
-        
-        if (typeof showGlobalAlert === 'function') {
-          try {
-            showGlobalAlert('error', msg); // O 'warning' a seconda di come gestisci gli alert nel tuo tema
-          } catch (e) {
-            alert("⚠️ " + msg);
-          }
-        } else {
-          alert("⚠️ " + msg);
-        }
-        
-        // Opzionale: ricarica la lista per assicurarsi che l'interfaccia sia sincronizzata
-        if (typeof cercaPrenotazioniUtente === 'function') cercaPrenotazioniUtente();
-      }
-    }, idPrenotazione);
-  };
-
-  // Pulizia del DOM alla chiusura del modale
-  modalElement.addEventListener('hidden.bs.modal', function () {
-    modalElement.remove();
-  });
-}
-
-
-function popolaPacchettiVisivi(p) {
-    const container = document.getElementById('pacchetti-cards-container');
-    if (!container) return;
-    container.innerHTML = '';
-    
-    const pacchettiDisponibili = [
-        { num: p.num1, prezzo: p.prezzo1, id: 1 },
-        { num: p.num2, prezzo: p.prezzo2, id: 2 },
-        { num: p.num3, prezzo: p.prezzo3, id: 3 }
-    ].filter(item => item.num && item.prezzo);
-
-    // Corretto qui sotto: aggiunto il punto . tra la variabile e forEach
-    pacchettiDisponibili.forEach((item, index) => {
-        container.innerHTML += `
-            <input type="radio" class="btn-check" name="pacchettoSelezionato" id="pacchetto-${item.id}" value="${item.num}" ${index === 0 ? 'checked' : ''} required>
-            <label class="btn btn-outline-dark p-3 text-start d-flex justify-content-between align-items-center border-2 rounded-3" for="pacchetto-${item.id}">
-                <div>
-                    <span class="fw-bold fs-6 d-block">${item.num} Lezioni</span>
-                    <span class="text-muted small">Tariffa dedicata</span>
-                </div>
-                <span class="fs-5 fw-bold text-purple">€${item.prezzo}</span>
-            </label>
-        `;
-    });
-}
-
-  // Funzione richiamata dal tab "Le mie lezioni" -> Pulsante Ricarica
-function apriModalAcquistoDaSearch() {
-  const searchNome = document.getElementById('search-nome');
-  const searchCognome = document.getElementById('search-cognome');
-  const acqNome = document.getElementById('acq-nome');
-  const acqCognome = document.getElementById('acq-cognome');
-
-  if (searchNome && acqNome) acqNome.value = searchNome.value;
-  if (searchCognome && acqCognome) acqCognome.value = searchCognome.value;
-  
-  if (typeof acquistoModalObj !== 'undefined' && acquistoModalObj) {
-    acquistoModalObj.show();
-  }
-  
-  // Esegue direttamente il popolamento delle categorie
-  apriAcquistoModal(); 
-}
-
-document.getElementById('form-acquisto').onsubmit = function(e) {
-  e.preventDefault();
-  
-  const telefono = document.getElementById('acq-telefono').value.trim();
-  const categoria = document.getElementById('acq-categoria').value.trim();
-  
-  const pacchettoSelezionato = document.querySelector('input[name="pacchettoSelezionato"]:checked');
-  if (!pacchettoSelezionato) {
-    showGlobalAlert('danger', '⚠️ Seleziona un pacchetto prima di procedere.');
-    return;
-  }
-  
-  const num = pacchettoSelezionato.value;
-
-  // 1. Registriamo l'acquisto del pacchetto
-  callServer('registraAcquistoUtente', res => {
-    if (res.success) {
-      if (typeof acquistoModalObj !== 'undefined' && acquistoModalObj) {
-        acquistoModalObj.hide();
-      }
-      showGlobalAlert('success', "Pacchetto acquistato con successo! Sto completando la prenotazione...");
-      
-      // 2. RECUPERO AUTOMATICO: Se avevamo salvato una lezione in sospeso, la prenotiamo adesso!
-      const lezioneInSospeso = sessionStorage.getItem('lezioneInSospesoId');
-      
-      if (lezioneInSospeso) {
-        sessionStorage.removeItem('lezioneInSospesoId'); // Puliamo la memoria
-        
-        // Chiamata immediata per prenotare la lezione desiderata usando i nuovi crediti
-        callServer('prenotaLezione', resPrenota => {
-          if (resPrenota.success) {
-            showGlobalAlert('success', "Lezione prenotata con successo!");
-          } else {
-            showGlobalAlert('warning', "Pacchetto caricato, ma c'è stato un problema con la prenotazione automatica: " + resPrenota.message);
-          }
-          if (typeof caricaLezioniServer === 'function') caricaLezioniServer();
-        }, lezioneInSospeso, telefono);
-        
-      } else {
-        if (typeof caricaLezioniServer === 'function') caricaLezioniServer();
-      }
-      
-    } else {
-      if (res.code === "UTENTE_NON_REGISTRATO") {
-        if (typeof acquistoModalObj !== 'undefined' && acquistoModalObj) {
-          acquistoModalObj.hide();
-        }
-        showGlobalAlert('danger', `⚠️ ${res.message} Vai nella sezione per registrarti.`);
-        const regTelefono = document.getElementById('reg-tab-telefono') || document.getElementById('reg-telefono');
-        if (regTelefono) regTelefono.value = telefono;
-        setTimeout(() => {
-          if (typeof switchSubTabMie === 'function') switchSubTabMie('register');
-          const tabMieElement = document.getElementById('tab-mie');
-          if (tabMieElement) tabMieElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 1500);
-      } else {
-        showGlobalAlert('danger', res.message);
-      }
-    }
-  }, telefono, categoria, num);
-};
-
-  // --- ISTRUTTORE: LEZIONI ---
-function caricaLezioniIstruttore() {
-  callServer('getLezioni', lezioni => {
-    const container = document.getElementById('instr-lista-lezioni');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    if (!lezioni || lezioni.length === 0) { 
-      container.innerHTML = '<p class="text-muted small text-center">Nessuna lezione.</p>'; 
-      return; 
-    }
-
-    // Salviamo la cache delle lezioni per usi futuri se necessario
-    window._lezioniIstruttoreCache = lezioni;
-
-    lezioni.forEach(l => {
-      const collapseId = 'collapseIscritti_' + (l.id || Math.random().toString(36).substring(2, 9));
-      
-      const cardDiv = document.createElement('div');
-      cardDiv.className = 'card border-0 shadow-sm mb-3 bg-light w-100';
-      cardDiv.style.borderRadius = '16px';
-      
-      cardDiv.innerHTML = `
-        <div class="card-body p-3">
-          <div class="d-flex justify-content-between align-items-start mb-2">
-            <div>
-              <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-                <strong class="text-dark fs-6">${l.nome || ''}</strong>
-                <span class="badge bg-secondary text-white px-2 py-1" style="font-size: 0.7rem;">${l.categoria || ''}</span>
-              </div>
-              <div class="small text-muted">
-                <i class="fa-regular fa-calendar me-1 text-secondary"></i>${l.dataFormatted || ''} (${l.oraInizio || ''} - ${l.oraFine || ''})
-              </div>
-              <div class="small text-muted mt-1">
-                <i class="fa-solid fa-location-dot me-1 text-secondary"></i>${l.luogo || 'N/D'}
-              </div>
-            </div>
-            
-            <!-- Pulsanti Azione (Modifica, Elimina e Condividi WhatsApp) -->
-            <div class="d-flex gap-1 flex-shrink-0 ms-2">
-              <button type="button" class="btn btn-sm btn-light text-success rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background-color: #E8F5E9 !important;" title="Invia promemoria WhatsApp" onclick='window.lezioneIstruttoreSelezionataData = ${JSON.stringify(l)}; apriModalWhatsAppGroup(${JSON.stringify(l)})'>
-                <i class="fa-brands fa-whatsapp" style="font-size: 0.9rem;"></i>
-              </button>
-              <button type="button" class="btn btn-sm btn-light text-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick='window.lezioneIstruttoreSelezionataData = ${JSON.stringify(l)}; modificaLezione("${l.id}", "${l.nome}", "${l.categoria}", "${l.dataIso}", "${l.oraInizio}", "${l.oraFine}", "${l.luogo}", ${l.postiMassimi})'>
-                <i class="fa-solid fa-pen" style="font-size: 0.8rem;"></i>
-              </button>
-              <button type="button" class="btn btn-sm btn-light text-danger rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick='window.lezioneIstruttoreSelezionataData = ${JSON.stringify(l)}; eliminaLezione("${l.id}")'>
-                <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="mt-2 pt-2 border-top border-light d-flex justify-content-between align-items-center">
-            <span class="small text-muted">Posti prenotati:</span>
-            <span class="badge bg-white text-dark border px-2 py-1 fw-bold shadow-sm" style="font-size: 0.75rem;">
-              <span id="counter-posti-${l.id}">${l.postiPrenotati || 0}</span> / ${l.postiMassimi || 0}
-            </span>
-          </div>
-
-          <div class="mt-2 pt-2 border-top border-light">
-            <button class="btn btn-sm btn-light text-primary w-100 d-flex justify-content-between align-items-center fw-semibold py-1 px-2 border shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}" onclick='window.lezioneIstruttoreSelezionataData = ${JSON.stringify(l)}; caricaIscrittiCardDinamica("${l.id}", "iscritti-container-${l.id}")' style="font-size: 0.8rem; background-color: #ffffff !important;">
-              <span><i class="fa-solid fa-users me-1"></i> Visualizza Iscritti</span>
-              <i class="fa-solid fa-plus"></i>
-            </button>
-            
-            <div class="collapse mt-2" id="${collapseId}">
-              <div class="p-2 bg-white border rounded-3 shadow-inner" id="iscritti-container-${l.id}">
-                <p class="text-muted small fst-italic mb-0">Caricamento iscritti...</p>
-              </div>
-            </div>
-          </div>
-        </div>`;
-
-      container.appendChild(cardDiv);
-    });
-  });
-}
-
-// Funzione di supporto per popolare gli iscritti e impostare correttamente i dati globali per la modale
-function caricaIscrittiCardDinamica(idLezione, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  container.innerHTML = '<p class="text-muted small fst-italic mb-0">Caricamento...</p>';
-
-  const lezioniCache = window._lezioniIstruttoreCache || [];
-  const lezioneTrovata = lezioniCache.find(l => String(l.id) === String(idLezione));
-  if (lezioneTrovata) {
-    window.lezioneIstruttoreSelezionataData = lezioneTrovata;
-  }
-
-  callServer('getIscrittiLezione', iscritti => {
-    
-    let headerActionHtml = `
-      <div class="d-flex justify-content-between align-items-center mb-2 pb-1 border-bottom">
-        <span class="small fw-bold text-secondary">Elenco Iscritti</span>
-        <button class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size: 0.75rem;" onclick="apriModalAggiungiUtenteIstruttore()">
-          <i class="fa-solid fa-user-plus me-1"></i> Aggiungi utente
-        </button>
-      </div>`;
-
-    if (!iscritti || iscritti.length === 0) {
-      container.innerHTML = `
-        ${headerActionHtml}
-        <p class="text-muted small fst-italic mb-0 text-center py-1">Nessun iscritto a questa lezione.</p>`;
-      return;
-    }
-
-    let itemsHtml = '';
-    iscritti.forEach(i => {
-      // NOTA: Passiamo i.idPrenotazione come primo parametro che la funzione cancellaPrenotazione si aspetta
-      itemsHtml += `<div class="d-flex align-items-center justify-content-between bg-light border px-2 py-1 rounded-2 shadow-sm mb-1" style="font-size: 0.8rem;">
-        <div>
-          <i class="fa-solid fa-user me-2 text-primary" style="font-size: 0.75rem;"></i>
-          <span class="fw-semibold text-dark">${i.nome} ${i.cognome}</span>
-        </div>
-        <button class="btn btn-sm btn-link text-danger p-0" onclick="rimuoviIscrittoLezione('${i.idPrenotazione}', '${i.nome}', '${i.cognome}', '${idLezione}')" title="Rimuovi iscritto">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>`;
-    });
-
-    container.innerHTML = `${headerActionHtml}<div class="d-flex flex-column">${itemsHtml}</div>`;
-  }, idLezione);
-}
-
-
-
-// Funzione per aggiornare al volo i posti e gli iscritti di una specifica lezione senza ricaricare tutta la pagina
-function aggiornaBoxLezione(rigaLezione) {
-  // 1. Ricarica la lista degli iscritti e il contatore dei posti
-  callServer('getLezioni', lezioni => {
-    // Aggiorniamo la cache globale
-    window._lezioniIstruttoreCache = lezioni;
-    
-    // Troviamo la lezione aggiornata
-    const lezioneAggiornata = lezioni.find(l => l.id == rigaLezione);
-    if (lezioneAggiornata) {
-      // Aggiorna il numerino dei posti (es: 3 / 10)
-      const spanCounter = document.getElementById(`counter-posti-${rigaLezione}`);
-      if (spanCounter) {
-        spanCounter.innerText = lezioneAggiornata.postiPrenotati || 0;
-      }
-    }
-  });
-
-  // 2. Ricarica anche l'elenco visivo degli iscritti nel box espanso
-  const containerId = `iscritti-container-${rigaLezione}`;
-  if (document.getElementById(containerId)) {
-    caricaIscrittiCardDinamica(rigaLezione, containerId);
-  }
-}
-
-// Funzione di supporto per popolare la select delle categorie
-function popolaSelectCategorie(categoriaSelezionata = '') {
-  google.script.run.withSuccessHandler(function( categorieList ) {
-    const selectCat = document.getElementById('edit-lez-cat');
-    selectCat.innerHTML = '<option value="">-- Seleziona Categoria --</option>';
-    
-    categorieList.forEach(cat => {
-      const selected = (cat === categoriaSelezionata) ? 'selected' : '';
-      selectCat.innerHTML += `<option value="${cat}" ${selected}>${cat}</option>`;
-    });
-  }).getCategorieListino();
-}
-
-function preparaNuovaLezione() {
-  document.getElementById('edit-lez-riga').value = '';
-  document.getElementById('edit-lez-nome').value = '';
-  document.getElementById('edit-lez-data').value = new Date().toISOString().split('T')[0];
-  document.getElementById('edit-lez-orain').value = '10:00';
-  document.getElementById('edit-lez-orafin').value = '11:00';
-  document.getElementById('edit-lez-luogo').value = '';
-  document.getElementById('edit-lez-posti').value = '10';
-  
-  // Popola la select e poi mostra la modale
-  popolaSelectCategorie('');
-  editLezioneModalObj.show();
-}
-
-function modificaLezione(id, nome, cat, dataIso, orain, orafin, luogo, posti) {
-  document.getElementById('edit-lez-riga').value = id;
-  document.getElementById('edit-lez-nome').value = nome;
-  document.getElementById('edit-lez-data').value = dataIso;
-  document.getElementById('edit-lez-orain').value = orain;
-  document.getElementById('edit-lez-orafin').value = orafin;
-  document.getElementById('edit-lez-luogo').value = luogo;
-  document.getElementById('edit-lez-posti').value = posti;
-  
-  // Popola la select preselezionando la categoria corrente della lezione
-  popolaSelectCategorie(cat);
-  editLezioneModalObj.show();
-}
-  document.getElementById('form-edit-lezione').onsubmit = function(e) {
-    e.preventDefault();
-    const riga = document.getElementById('edit-lez-riga').value;
-    const nome = document.getElementById('edit-lez-nome').value;
-    const cat = document.getElementById('edit-lez-cat').value;
-    const data = document.getElementById('edit-lez-data').value;
-    const orain = document.getElementById('edit-lez-orain').value;
-    const orafin = document.getElementById('edit-lez-orafin').value;
-    const luogo = document.getElementById('edit-lez-luogo').value;
-    const posti = document.getElementById('edit-lez-posti').value;
-
-    if (riga) {
-      callServer('aggiornaLezione', res => { editLezioneModalObj.hide(); showGlobalAlert('success', res.message); caricaDatiIstruttore(); caricaLezioniServer(); }, riga, nome, data, orain, orafin, luogo, posti, cat);
-    } else {
-      callServer('aggiungiNuovaLezione', res => { editLezioneModalObj.hide(); showGlobalAlert('success', res.message); caricaDatiIstruttore(); caricaLezioniServer(); }, nome, data, orain, orafin, luogo, posti, cat);
-    }
-  };
-
-function eliminaLezione(idLezione) {
-  // --- CONTROLLO POSTI PRENOTATI ---
-  const spanCounter = document.getElementById('counter-posti-' + idLezione);
-  const postiPrenotati = spanCounter ? parseInt(spanCounter.textContent.trim(), 10) || 0 : 0;
-
-  if (postiPrenotati > 0) {
-    const oldModal = document.getElementById('customConfirmModal');
-    if (oldModal) oldModal.remove();
-
-    const modalBlockHtml = `
-      <div class="modal fade" id="customConfirmModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-            <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-              <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-                <i class="fa-solid fa-triangle-exclamation me-2"></i>Impossibile Eliminare
-              </h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4 text-center">
-              <div class="mb-3">
-                <i class="fa-solid fa-users-slash text-purple" style="font-size: 3rem; color: #FF64AE;"></i>
-              </div>
-              <p class="text-dark fw-semibold mb-1" style="font-size: 1rem;">Ci sono utenti iscritti a questa lezione!</p>
-              <p class="text-muted small mb-0">Prima di poter eliminare la lezione, è necessario rimuovere tutti gli utenti iscritti.</p>
-            </div>
-            <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-center">
-              <button type="button" class="btn rounded-pill px-4 fw-bold text-white" data-bs-dismiss="modal" style="font-size: 0.9rem; background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); border: none;">Ho capito</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', modalBlockHtml);
-    const modalEl = document.getElementById('customConfirmModal');
-    const bsModal = new bootstrap.Modal(modalEl);
-    bsModal.show();
-    modalEl.addEventListener('hidden.bs.modal', function () { modalEl.remove(); });
-    return;
-  }
-  // ---------------------------------
-
-  // Rimuoviamo eventuali modali precedenti per evitare duplicati nel DOM
-  const oldModal = document.getElementById('customConfirmModal');
-  if (oldModal) oldModal.remove();
-
-  // Creiamo dinamicamente la struttura HTML del modale
-  const modalHtml = `
-    <div class="modal fade" id="customConfirmModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-          <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-            <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-              <i class="fa-solid fa-triangle-exclamation me-2"></i>Conferma Eliminazione
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4 text-center">
-            <div class="mb-3">
-              <i class="fa-regular fa-trash-can text-danger" style="font-size: 3rem;"></i>
-            </div>
-            <p class="text-dark fw-semibold mb-1" style="font-size: 1rem;">Eliminare questa lezione?</p>
-            <p class="text-muted small mb-0">L'azione è irreversibile e rimuoverà la lezione dal sistema.</p>
-          </div>
-          <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-center gap-2">
-            <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal" style="font-size: 0.9rem;">Annulla</button>
-            <button type="button" id="btnConfirmDelete" class="btn rounded-pill px-4 fw-bold text-white" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); font-size: 0.9rem; border: none;">Sì, elimina</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Iniettiamo il modale nel body
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const modalElement = document.getElementById('customConfirmModal');
-  const bootstrapModal = new bootstrap.Modal(modalElement);
-  bootstrapModal.show();
-
-  // Gestione del click sul pulsante di conferma effettivo
-  document.getElementById('btnConfirmDelete').onclick = function() {
-    bootstrapModal.hide();
-    
-    if (typeof showLoading === 'function') showLoading("Eliminazione in corso...");
-
-    // Passiamo l'idLezione anziché il numero di riga
-    callServer('eliminaLezione', res => {
-      if (typeof hideLoading === 'function') hideLoading();
-
-      if (res && res.success !== false) {
-        if (typeof showGlobalAlert === 'function') {
-          showGlobalAlert('success', res.message || "Lezione eliminata con successo.");
-        }
-        if (typeof caricaDatiIstruttore === 'function') caricaDatiIstruttore();
-        if (typeof caricaLezioniServer === 'function') caricaLezioniServer();
-      } else {
-        const msg = res && res.message ? res.message : "Errore durante l'eliminazione.";
-        if (typeof showGlobalAlert === 'function') {
-          showGlobalAlert('error', msg);
-        } else {
-          alert("⚠️ " + msg);
-        }
-      }
-    }, idLezione);
-  };
-
-  // Pulizia del DOM alla chiusura del modale
-  modalElement.addEventListener('hidden.bs.modal', function () {
-    modalElement.remove();
-  });
-}
-  // --- ISTRUTTORE: ISCRITTI ---
-// --- ISTRUTTORE: ISCRITTI ---
-  function caricaSelectLezioniIstruttore() {
-    callServer('getLezioni', lezioni => {
-      console.log("Lezioni caricate per istruttore:", lezioni);
-      const select = document.getElementById('instr-select-lezione-iscritti');
-      select.innerHTML = '<option value="">-- Scegli una lezione --</option>';
-      
-      window._lezioniIstruttoreCache = lezioni || []; 
-      
-      lezioni.forEach(l => { 
-        const cat = l.categoria || l.cat || l.categoriaLezione || "";
-        select.innerHTML += `<option value="${l.id}">${l.nome || "Lezione"} (${cat}) - ${l.dataFormatted || l.data || ""} (${l.oraInizio || ""})</option>`; 
-      });
-      
-      document.getElementById('btn-apri-aggiungi-utente').disabled = true;
-      window.lezioneIstruttoreSelezionataData = null;
-    });
-  }
-
-  function caricaIscrittiLezioneSelezionata() {
-    const idLezione = document.getElementById('instr-select-lezione-iscritti').value;
-    const container = document.getElementById('instr-container-iscritti');
-    const btnAggiungi = document.getElementById('btn-apri-aggiungi-utente');
-
-    if (!idLezione) { 
-      container.innerHTML = '<p class="text-muted small text-center">Seleziona una lezione.</p>'; 
-      btnAggiungi.disabled = true;
-      window.lezioneIstruttoreSelezionataData = null;
-      return; 
-    }
-
-    // Cerca la lezione nella cache e la salva in una proprietà globale per evitare errori di dichiarazione
-    const cache = window._lezioniIstruttoreCache || [];
-    window.lezioneIstruttoreSelezionataData = cache.find(l => String(l.id) === String(idLezione));
-    
-    console.log("Lezione selezionata trovata:", window.lezioneIstruttoreSelezionataData);
-
-    if (window.lezioneIstruttoreSelezionataData) {
-      window.lezioneIstruttoreSelezionataData.categoria = window.lezioneIstruttoreSelezionataData.categoria || window.lezioneIstruttoreSelezionataData.cat || window.lezioneIstruttoreSelezionataData.categoriaLezione;
-      btnAggiungi.disabled = false;
-    } else {
-      btnAggiungi.disabled = true;
-    }
-
-    callServer('getIscrittiLezione', iscritti => {
-      container.innerHTML = '';
-      if (!iscritti || iscritti.length === 0) { 
-        container.innerHTML = '<p class="text-muted small text-center py-2">Nessun iscritto.</p>'; 
-        return; 
-      }
-      iscritti.forEach(i => {
-        container.innerHTML += `<div class="d-flex justify-content-between align-items-center p-2 mb-2 bg-white rounded shadow-sm border w-100">
-          <span class="fw-bold small">${i.nome} ${i.cognome}</span>
-          <button class="btn btn-sm btn-outline-danger rounded-circle" onclick="rimuoviIscrittoLezione(${i.prenotazioneRow})"><i class="fa-solid fa-trash"></i></button>
-        </div>`;
-      });
-    }, idLezione);
-  }
-
-  // Apre il modale e carica solo gli utenti che hanno crediti per QUELLA categoria
-function apriModalAggiungiUtenteIstruttore() {
-    const lezione = window.lezioneIstruttoreSelezionataData;
-    if (!lezione || !lezione.categoria) {
-      alert("Seleziona prima una lezione valida.");
-      return;
-    }
-
-    // Controllo di sicurezza: se l'elemento esiste lo aggiorna, altrimenti evita il crash
-    const lblCategoria = document.getElementById('lbl-categoria-lezione');
-    if (lblCategoria) {
-      lblCategoria.innerText = lezione.categoria;
-    }
-
-    const selectUtenti = document.getElementById('select-utenti-crediti');
-    if (selectUtenti) {
-      selectUtenti.innerHTML = '<option value="">Controllo crediti in corso...</option>';
-    }
-
-    const modalEl = document.getElementById('modalAggiungiUtenteIstruttore');
-    if (!modalEl) {
-      alert("Errore: Modale non trovato nella pagina.");
-      return;
-    }
-
-    const modal = new bootstrap.Modal(modalEl);
-    modal.show();
-
-    callServer('getUtentiConCreditiPerCategoria', utenti => {
-      if (selectUtenti) {
-        selectUtenti.innerHTML = '<option value="">-- Seleziona un utente --</option>';
-        if (!utenti || utenti.length === 0) {
-          selectUtenti.innerHTML = '<option value="">Nessun utente con crediti per questa categoria</option>';
-          return;
-        }
-        utenti.forEach(u => {
-          selectUtenti.innerHTML += `<option value='${JSON.stringify({nome: u.nome, cognome: u.cognome})}'>${u.nome} ${u.cognome} (Crediti residui: ${u.rimanenti})</option>`;
-        });
-      }
-    }, lezione.categoria);
-  }
-
-// Conferma l'aggiunta dell'utente scelto dal menu a tendina filtrato
-function confermaAggiuntaUtenteIstruttore() {
-  const selectVal = document.getElementById('select-utenti-crediti').value;
-  if (!selectVal) {
-    alert("Seleziona un utente.");
-    return;
-  }
-
-  const utente = JSON.parse(selectVal);
-  const l = window.lezioneIstruttoreSelezionataData;
-
-  let dataPulita = "";
-  if (l.dataIso) {
-    dataPulita = l.dataIso;
-  } else if (l.data) {
-    dataPulita = String(l.data).substring(0, 10);
-  }
-
-  // Funzione interna per mostrare il popup grafico personalizzato (stile modale)
-  function mostraPopupEsito(titolo, messaggio, isSuccesso, idLezioneDaAggiornare) {
-    const oldModal = document.getElementById('customPopupModal');
-    if (oldModal) oldModal.remove();
-
-    const iconaHtml = isSuccesso 
-      ? '<i class="fa-solid fa-circle-check text-success" style="font-size: 3rem;"></i>' 
-      : '<i class="fa-solid fa-triangle-exclamation text-danger" style="font-size: 3rem;"></i>';
-
-    const modalHtml = `
-      <div class="modal fade" id="customPopupModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-            <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-              <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-                <i class="fa-solid fa-info-circle me-2"></i>${titolo}
-              </h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4 text-center">
-              <div class="mb-3">
-                ${iconaHtml}
-              </div>
-              <p class="text-dark fw-semibold mb-0" style="font-size: 1rem;">${messaggio}</p>
-            </div>
-            <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-center">
-              <button type="button" class="btn rounded-pill px-4 fw-bold text-white" data-bs-dismiss="modal" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); font-size: 0.9rem; border: none;">Chiudi</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-    const modalElement = document.getElementById('customPopupModal');
-    const bootstrapPopup = new bootstrap.Modal(modalElement);
-    bootstrapPopup.show();
-
-    // Quando chiudiamo il popup di esito, aggiorniamo la UI
-    modalElement.addEventListener('hidden.bs.modal', function () {
-      modalElement.remove();
-      if (isSuccesso) {
-        if (typeof aggiornaBoxLezione === 'function' && idLezioneDaAggiornare) {
-          aggiornaBoxLezione(idLezioneDaAggiornare);
-        } else if (typeof caricaLezioniServer === 'function') {
-          caricaLezioniServer();
-        } else if (typeof caricaLezioniIstruttore === 'function') {
-          caricaLezioniIstruttore();
-        }
-      }
-    });
-  }
-
-  // 1. Chiudiamo subito il modale di aggiunta utente in modo pulito
-  const modalAddEl = document.getElementById('modalAggiungiUtenteIstruttore');
-  if (modalAddEl) {
-    const modalAdd = bootstrap.Modal.getInstance(modalAddEl);
-    if (modalAdd) modalAdd.hide();
-  }
-
-  // 2. Chiamata al server passandogli anche l'ID lezione e il telefono dell'utente
-  // Assicurati che l'oggetto utente contenga la proprietà 'telefono' (o 'tel')
-  const telefonoUtente = utente.telefono || utente.tel || "";
-  const idLezione = l.id || "";
-
-  callServer('amministratoreIscriviUtente', res => {
-    if (res && res.success) {
-      mostraPopupEsito("Iscrizione Completata", res.message, true, l.id);
-    } else {
-      const msgErrore = res ? res.message : "Errore sconosciuto durante l'iscrizione.";
-      mostraPopupEsito("Attenzione", msgErrore, false, null);
-    }
-  }, utente.nome, utente.cognome, l.categoria, dataPulita, l.oraInizio, l.oraFine, l.nome, l.luogo, idLezione, telefonoUtente);
-}
-
-function rimuoviIscrittoLezione(idPrenotazione, nome, cognome, idLezione) {
-  const oldModal = document.getElementById('customConfirmModal');
-  if (oldModal) oldModal.remove();
-
-  const modalHtml = `
-    <div class="modal fade" id="customConfirmModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-          <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-            <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-              <i class="fa-solid fa-triangle-exclamation me-2"></i>Conferma Rimozione
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4 text-center">
-            <div class="mb-3">
-              <i class="fa-solid fa-user-xmark text-danger" style="font-size: 3rem;"></i>
-            </div>
-            <p class="text-dark fw-semibold mb-1" style="font-size: 1rem;">Rimuovere ${nome} ${cognome}?</p>
-            <p class="text-muted small mb-0">L'utente verrà rimosso dalla lezione selezionata.</p>
-          </div>
-          <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-center gap-2">
-            <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal" style="font-size: 0.9rem;">Annulla</button>
-            <button type="button" id="btnConfirmDelete" class="btn rounded-pill px-4 fw-bold text-white" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); font-size: 0.9rem; border: none;">Sì, rimuovi</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const modalElement = document.getElementById('customConfirmModal');
-  const bootstrapModal = new bootstrap.Modal(modalElement);
-  bootstrapModal.show();
-
-  document.getElementById('btnConfirmDelete').onclick = function() {
-    bootstrapModal.hide();
-    
-    // Passiamo l'ID univoco della prenotazione al server
-    callServer('cancellaPrenotazione', res => { 
-      if (res && res.success) {
-        if (typeof showGlobalAlert === 'function') {
-          try { showGlobalAlert('success', res.message); } catch(e) { alert(res.message); }
-        } else {
-          alert(res.message);
-        }
-        
-        if (typeof aggiornaBoxLezione === 'function' && idLezione) {
-          aggiornaBoxLezione(idLezione);
-        } else if (typeof caricaLezioniIstruttore === 'function') {
-          caricaLezioniIstruttore();
-        } else {
-          location.reload();
-        }
-
-      } else {
-        alert("⚠️ " + (res ? res.message : "Errore durante la rimozione"));
-      }
-    }, idPrenotazione);
-  };
-
-  modalElement.addEventListener('hidden.bs.modal', function () {
-    modalElement.remove();
-  });
-}
-
-  
-
-  // --- ISTRUTTORE: UTENTI & TAG ACQUISTI ---
-function caricaUtentiIstruttore() {
-  callServer('getTuttiUtenti', utenti => {
-    const container = document.getElementById('instr-lista-utenti');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    if (!utenti || utenti.length === 0) { 
-      container.innerHTML = '<p class="text-muted small text-center">Nessun utente.</p>'; 
-      return; 
-    }
-
-    window._utentiIstruttoreCache = utenti;
-
-    utenti.forEach((u, index) => {
-      let tagAcquistiHtml = '';
-      if (u.dettaglioAcquisti && u.dettaglioAcquisti.length > 0) {
-        tagAcquistiHtml = `
-          <div class="mt-3 pt-2 border-top border-light">
-            <span class="d-block small text-muted fw-bold mb-1">Acquisti per categoria:</span>
-            <div class="d-flex flex-wrap gap-1">
-              ` + u.dettaglioAcquisti.map(a => `
-                <span class="badge bg-white text-dark border px-2 py-1 fw-normal shadow-sm" style="font-size: 0.75rem;">
-                  <strong>${a.categoria}</strong>: Acq ${a.acquistate} | Usate ${a.utilizzate} | <span class="text-danger fw-bold">Da saldare ${a.daSaldare}</span>
-                </span>
-              `).join('') + `
-            </div>
-          </div>`;
-      } else {
-        tagAcquistiHtml = '<div class="mt-3 pt-2 border-top border-light small text-muted fst-italic">Nessun pacchetto registrato.</div>';
-      }
-
-      const cardDiv = document.createElement('div');
-      cardDiv.className = 'card border-0 shadow-sm mb-3 bg-light w-100';
-      cardDiv.style.borderRadius = '16px';
-      
-      // Layout ottimizzato: su mobile usa colonna (flex-column), da medium in su torna in riga (flex-md-row)
-      cardDiv.innerHTML = `
-        <div class="card-body p-3">
-          <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-2">
-            <div>
-              <strong class="text-dark fs-6 d-block">${u.nome || ''} ${u.cognome || ''}</strong>
-              <div class="small text-muted mt-1 text-break">
-                <i class="fa-solid fa-phone me-1 text-secondary"></i>${u.telefono || 'N/D'}<span class="d-none d-md-inline"> &nbsp;|&nbsp; </span><span class="d-block d-md-inline mt-1 mt-md-0"><i class="fa-solid fa-envelope me-1 text-secondary"></i>${u.email || 'N/D'}</span>
-              </div>
-            </div>
-            <!-- Pulsanti a misura di dito (touch-friendly) ben distanziati su mobile -->
-            <div class="d-flex gap-2 flex-shrink-0 align-self-end align-self-md-center mt-2 mt-md-0" id="user-actions-${index}"></div>
-          </div>
-          ${tagAcquistiHtml}
-        </div>`;
-
-      container.appendChild(cardDiv);
-
-      const actionsContainer = document.getElementById(`user-actions-${index}`);
-      if (!actionsContainer) return;
-      
-      // Pulsante WhatsApp (ingrandito leggermente a 36px per facilitare il tap da smartphone)
-      const btnWa = document.createElement('button');
-      btnWa.type = 'button';
-      btnWa.className = 'btn btn-sm btn-light text-success rounded-circle shadow-sm d-flex align-items-center justify-content-center';
-      btnWa.style.cssText = 'width: 36px; height: 36px; background-color: #E8F5E9 !important; border: none;';
-      btnWa.title = 'Contatta su WhatsApp';
-      btnWa.innerHTML = '<i class="fa-brands fa-whatsapp" style="font-size: 1rem;"></i>';
-      btnWa.onclick = () => apriModalWhatsAppUtente(u);
-      actionsContainer.appendChild(btnWa);
-
-      // Pulsante Modifica
-      const btnEdit = document.createElement('button');
-      btnEdit.type = 'button';
-      btnEdit.className = 'btn btn-sm btn-light text-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center';
-      btnEdit.style.cssText = 'width: 36px; height: 36px; border: none;';
-      btnEdit.title = 'Modifica utente';
-      btnEdit.innerHTML = '<i class="fa-solid fa-pen" style="font-size: 0.85rem;"></i>';
-      btnEdit.onclick = () => apriModificaUtenteCompleta(u);
-      actionsContainer.appendChild(btnEdit);
-
-      // Pulsante Elimina
-      const btnDel = document.createElement('button');
-      btnDel.type = 'button';
-      btnDel.className = 'btn btn-sm btn-light text-danger rounded-circle shadow-sm d-flex align-items-center justify-content-center';
-      btnDel.style.cssText = 'width: 36px; height: 36px; border: none;';
-      btnDel.title = 'Elimina utente';
-      btnDel.innerHTML = '<i class="fa-solid fa-trash-can" style="font-size: 0.85rem;"></i>';
-      btnDel.onclick = () => eliminaUtente(u.rowIndex);
-      actionsContainer.appendChild(btnDel);
-    });
-  });
-}
-
-let modalModificaCompletaObj = null;
-
-document.addEventListener('DOMContentLoaded', () => {
-  const modalEl = document.getElementById('modalModificaUtenteCompleta');
-  if (modalEl) {
-    modalModificaCompletaObj = new bootstrap.Modal(modalEl);
-  }
-});
-
-// Funzione richiamata dal bottone della matita nella lista utenti
-function apriModificaUtenteCompleta(utenteJson) {
-  // utenteJson è l'oggetto utente passato dall'elenco
-  document.getElementById('edit-user-rowindex').value = utenteJson.rowIndex;
-  document.getElementById('edit-user-nome').value = utenteJson.nome;
-  document.getElementById('edit-user-cognome').value = utenteJson.cognome;
-  document.getElementById('edit-user-telefono').value = utenteJson.telefono || '';
-  document.getElementById('edit-user-email').value = utenteJson.email || '';
-
-  renderizzaTabellaCategorie(utenteJson.dettaglioAcquisti || []);
-
-  if (modalModificaCompletaObj) {
-    modalModificaCompletaObj.show();
-  }
-}
-
-function renderizzaTabellaCategorie(pacchetti) {
-  const container = document.getElementById('container-categorie-utente');
-  let html = `<table class="table table-sm align-middle">
-    <thead class="table-light">
-      <tr>
-        <th>Categoria</th>
-        <th style="width: 110px;">Acquistate</th>
-        <th style="width: 110px;">Utilizzate</th>
-        <th style="width: 110px;">Da Saldare</th>
-        <th style="width: 50px;"></th>
-      </tr>
-    </thead>
-    <tbody id="tbody-categorie-edit">`;
-
-  if (pacchetti.length === 0) {
-    html += `<tr><td colspan="5" class="text-center text-muted small py-2">Nessun pacchetto attivo. Clicca "Aggiungi Categoria" per inserirne uno.</td></tr>`;
-  } else {
-    pacchetti.forEach((p, idx) => {
-      html += `<tr>
-        <td><input type="text" class="form-control form-control-sm input-cat-nome" value="${p.categoria}" required></td>
-        <td><input type="number" class="form-control form-control-sm input-cat-acq" value="${p.acquistate}" min="0"></td>
-        <td><input type="number" class="form-control form-control-sm input-cat-uti" value="${p.utilizzate}" min="0"></td>
-        <td><input type="number" class="form-control form-control-sm input-cat-sal" value="${p.daSaldare}" min="0"></td>
-        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()"><i class="fa-solid fa-trash"></i></button></td>
-      </tr>`;
-    });
-  }
-
-  html += `</tbody></table>`;
-  container.innerHTML = html;
-}
-
-function aggiungiRigaCategoriaModal() {
-  const tbody = document.getElementById('tbody-categorie-edit');
-  // Se c'è il messaggio "Nessun pacchetto", puliamo la tabella
-  if (tbody.querySelector('td.text-center')) {
-    tbody.innerHTML = '';
-  }
-  
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td><input type="text" class="form-control form-control-sm input-cat-nome" placeholder="Es. Sala, Online..." required></td>
-    <td><input type="number" class="form-control form-control-sm input-cat-acq" value="0" min="0"></td>
-    <td><input type="number" class="form-control form-control-sm input-cat-uti" value="0" min="0"></td>
-    <td><input type="number" class="form-control form-control-sm input-cat-sal" value="0" min="0"></td>
-    <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()"><i class="fa-solid fa-trash"></i></button></td>
-  `;
-  tbody.appendChild(tr);
-}
-
-// Salvataggio del form di modifica completa
-document.getElementById('form-modifica-utente-completo').onsubmit = function(e) {
-  e.preventDefault();
-  
-  const rowIndex = document.getElementById('edit-user-rowindex').value;
-  const nome = document.getElementById('edit-user-nome').value.trim();
-  const cognome = document.getElementById('edit-user-cognome').value.trim();
-  const telefono = document.getElementById('edit-user-telefono').value.trim();
-  const email = document.getElementById('edit-user-email').value.trim();
-
-  // Raccoglie i dati delle categorie dalla tabella dinamica
-  const pacchetti = [];
-  const righe = document.querySelectorAll('#tbody-categorie-edit tr');
-  righe.forEach(r => {
-    const inputCat = r.querySelector('.input-cat-nome');
-    if (inputCat) {
-      pacchetti.push({
-        categoria: inputCat.value.trim(),
-        acquistate: r.querySelector('.input-cat-acq').value,
-        utilizzate: r.querySelector('.input-cat-uti').value,
-        daSaldare: r.querySelector('.input-cat-sal').value,
-        telefono: telefono // <--- Aggiunto esattamente come nell'altra funzione
-      });
-    }
-  });
-
-  const datiModifica = { rowIndex, nome, cognome, telefono, email, pacchetti };
-
-  callServer('aggiornaUtenteCompleto', res => {
-    if (res.success) {
-      showGlobalAlert('success', res.message);
-      if (modalModificaCompletaObj) modalModificaCompletaObj.hide();
-      if (typeof caricaUtentiIstruttore === 'function') caricaUtentiIstruttore();
-    } else {
-      showGlobalAlert('danger', res.message);
-    }
-  }, datiModifica);
-};
-
-
-
-
-  let modalNuovoCompletaObj = null;
-
-document.addEventListener('DOMContentLoaded', () => {
-  const modalEl = document.getElementById('modalNuovoUtenteCompleto');
-  if (modalEl) {
-    modalNuovoCompletaObj = new bootstrap.Modal(modalEl);
-  }
-});
-
-// Funzione richiamata dal bottone "Aggiungi Utente"
-function preparaNuovoUtente() {
-  document.getElementById('form-nuovo-utente-completo').reset();
-  const tbody = document.getElementById('tbody-categorie-nuovo-edit');
-  tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted small py-2">Nessun pacchetto inserito. Clicca "Aggiungi Categoria" se necessario.</td></tr>`;
-  
-  if (modalNuovoCompletaObj) {
-    modalNuovoCompletaObj.show();
-  }
-}
-
-function aggiungiRigaCategoriaNuovoModal() {
-  const tbody = document.getElementById('tbody-categorie-nuovo-edit');
-  if (tbody.querySelector('td.text-center')) {
-    tbody.innerHTML = '';
-  }
-  
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td><input type="text" class="form-control form-control-sm input-new-cat-nome" placeholder="Es. Sala, Online..." required></td>
-    <td><input type="number" class="form-control form-control-sm input-new-cat-acq" value="0" min="0"></td>
-    <td><input type="number" class="form-control form-control-sm input-new-cat-uti" value="0" min="0"></td>
-    <td><input type="number" class="form-control form-control-sm input-new-cat-sal" value="0" min="0"></td>
-    <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()"><i class="fa-solid fa-trash"></i></button></td>
-  `;
-  tbody.appendChild(tr);
-}
-
-// Invio del form per registrare il nuovo utente completo
-document.getElementById('form-nuovo-utente-completo').onsubmit = function(e) {
-  e.preventDefault();
-  
-  const nome = document.getElementById('new-user-nome').value.trim();
-  const cognome = document.getElementById('new-user-cognome').value.trim();
-  const telefono = document.getElementById('new-user-telefono').value.trim();
-  const email = document.getElementById('new-user-email').value.trim();
-
-  const pacchetti = [];
-  const righe = document.querySelectorAll('#tbody-categorie-nuovo-edit tr');
-  righe.forEach(r => {
-    const inputCat = r.querySelector('.input-new-cat-nome');
-    if (inputCat) {
-      pacchetti.push({
-        categoria: inputCat.value.trim(),
-        acquistate: r.querySelector('.input-new-cat-acq').value,
-        utilizzate: r.querySelector('.input-new-cat-uti').value,
-        daSaldare: r.querySelector('.input-new-cat-sal').value,
-        telefono: telefono // <--- AGGIUNTO ANCHE QUI PER SICUREZZA
-      });
-    }
-  });
-
-  const datiNuovoUtente = { nome, cognome, telefono, email, pacchetti };
-
-  callServer('registraUtenteCompleto', res => {
-    if (res.success) {
-      showGlobalAlert('success', res.message);
-      if (modalNuovoCompletaObj) modalNuovoCompletaObj.hide();
-      if (typeof caricaUtentiIstruttore === 'function') caricaUtentiIstruttore();
-    } else {
-      showGlobalAlert('danger', res.message);
-    }
-  }, datiNuovoUtente);
-};
-
-  function modificaUtente(riga, nome, cognome, tel, email, daSaldare) {
-    document.getElementById('edit-ut-riga').value = riga;
-    document.getElementById('edit-ut-nome').value = nome;
-    document.getElementById('edit-ut-cognome').value = cognome;
-    document.getElementById('edit-ut-tel').value = tel;
-    document.getElementById('edit-ut-email').value = email;
-    document.getElementById('edit-ut-dasaldare').value = daSaldare;
-    editUtenteModalObj.show();
-  }
-
-  document.getElementById('form-edit-utente').onsubmit = function(e) {
-    e.preventDefault();
-    const riga = document.getElementById('edit-ut-riga').value;
-    const nome = document.getElementById('edit-ut-nome').value;
-    const cognome = document.getElementById('edit-ut-cognome').value;
-    const tel = document.getElementById('edit-ut-tel').value;
-    const email = document.getElementById('edit-ut-email').value;
-    const daSaldare = document.getElementById('edit-ut-dasaldare').value;
-
-    callServer('salvaUtenteIstruttore', res => { editUtenteModalObj.hide(); showGlobalAlert('success', res.message); caricaUtentiIstruttore(); }, riga, nome, cognome, tel, email, daSaldare);
-  };
-
-function eliminaUtente(riga) {
-  // Rimuoviamo eventuali modali precedenti per evitare duplicati nel DOM
-  const oldModal = document.getElementById('customConfirmModal');
-  if (oldModal) oldModal.remove();
-
-  // Creiamo dinamicamente la struttura HTML del modale
-  const modalHtml = `
-    <div class="modal fade" id="customConfirmModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-          <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-            <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-              <i class="fa-solid fa-triangle-exclamation me-2"></i>Conferma Eliminazione
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4 text-center">
-            <div class="mb-3">
-              <i class="fa-regular fa-user-slash text-danger" style="font-size: 3rem;"></i>
-            </div>
-            <p class="text-dark fw-semibold mb-1" style="font-size: 1rem;">Eliminare utente?</p>
-            <p class="text-muted small mb-0">L'utente verrà eliminato definitivamente dal sistema.</p>
-          </div>
-          <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-center gap-2">
-            <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal" style="font-size: 0.9rem;">Annulla</button>
-            <button type="button" id="btnConfirmDelete" class="btn rounded-pill px-4 fw-bold text-white" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); font-size: 0.9rem; border: none;">Sì, elimina</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Iniettiamo il modale nel body
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const modalElement = document.getElementById('customConfirmModal');
-  const bootstrapModal = new bootstrap.Modal(modalElement);
-  bootstrapModal.show();
-
-  // Gestione del click sul pulsante di conferma effettivo
-  document.getElementById('btnConfirmDelete').onclick = function() {
-    bootstrapModal.hide();
-    
-    callServer('eliminaUtenteIstruttore', res => { 
-      if (typeof showGlobalAlert === 'function') {
-        showGlobalAlert('success', res.message); 
-      }
-      if (typeof caricaUtentiIstruttore === 'function') {
-        caricaUtentiIstruttore(); 
-      }
-    }, riga);
-  };
-
-  // Pulizia del DOM alla chiusura del modale
-  modalElement.addEventListener('hidden.bs.modal', function () {
-    modalElement.remove();
-  });
-}
-
-  // --- ISTRUTTORE: LISTINI & CATEGORIE ---
-function caricaListiniIstruttore() {
-    callServer('getConfigurazioneListini', listini => {
-      const container = document.getElementById('instr-lista-listini');
-      container.innerHTML = '';
-      if (!listini || listini.length === 0) { 
-        container.innerHTML = '<p class="text-muted small text-center">Nessuna categoria configurata.</p>'; 
-        return; 
-      }
-
-      listini.forEach(l => {
-        container.innerHTML += `
-          <div class="card border-0 shadow-sm mb-3 bg-light w-100" style="border-radius: 16px;">
-            <div class="card-body p-3">
-              
-              <!-- Intestazione con Titolo e Pulsanti Azione in alto a destra -->
-              <div class="d-flex justify-content-between align-items-start mb-2">
-                <strong class="text-dark fs-6">${l.categoria}</strong>
-                <div class="d-flex gap-1">
-                  <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="modificaCategoriaListino(${l.rowIndex}, '${l.categoria}', ${l.p1Num}, ${l.p1Prezzo}, ${l.p2Num}, ${l.p2Prezzo}, ${l.p3Num}, ${l.p3Prezzo})">
-                    <i class="fa-solid fa-pen" style="font-size: 0.8rem;"></i>
-                  </button>
-                  <button class="btn btn-sm btn-light text-danger rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;" onclick="eliminaCategoriaListino(${l.rowIndex})">
-                    <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Dettagli Pacchetti a badge puliti e leggibili su mobile -->
-              <div class="d-flex flex-wrap gap-1 mt-2 pt-2 border-top border-light">
-                <span class="badge bg-white text-dark border px-2 py-1 fw-normal shadow-sm" style="font-size: 0.75rem;">
-                  <strong>P1:</strong> ${l.p1Num} lez <span class="text-success fw-bold">€${l.p1Prezzo}</span>
-                </span>
-                <span class="badge bg-white text-dark border px-2 py-1 fw-normal shadow-sm" style="font-size: 0.75rem;">
-                  <strong>P2:</strong> ${l.p2Num} lez <span class="text-success fw-bold">€${l.p2Prezzo}</span>
-                </span>
-                <span class="badge bg-white text-dark border px-2 py-1 fw-normal shadow-sm" style="font-size: 0.75rem;">
-                  <strong>P3:</strong> ${l.p3Num} lez <span class="text-success fw-bold">€${l.p3Prezzo}</span>
-                </span>
-              </div>
-
-            </div>
-          </div>`;
-      });
-    });
-  }
-
-  function preparaNuovaCategoriaListino() {
-    document.getElementById('edit-list-riga').value = '';
-    document.getElementById('edit-list-cat').value = '';
-    document.getElementById('edit-list-p1num').value = '1';
-    document.getElementById('edit-list-p1pr').value = '15';
-    document.getElementById('edit-list-p2num').value = '5';
-    document.getElementById('edit-list-p2pr').value = '65';
-    document.getElementById('edit-list-p3num').value = '10';
-    document.getElementById('edit-list-p3pr').value = '120';
-    editListinoModalObj.show();
-  }
-
-  function modificaCategoriaListino(riga, cat, p1n, p1p, p2n, p2p, p3n, p3p) {
-    document.getElementById('edit-list-riga').value = riga;
-    document.getElementById('edit-list-cat').value = cat;
-    document.getElementById('edit-list-p1num').value = p1n;
-    document.getElementById('edit-list-p1pr').value = p1p;
-    document.getElementById('edit-list-p2num').value = p2n;
-    document.getElementById('edit-list-p2pr').value = p2p;
-    document.getElementById('edit-list-p3num').value = p3n;
-    document.getElementById('edit-list-p3pr').value = p3p;
-    editListinoModalObj.show();
-  }
-
-  document.getElementById('form-edit-listino').onsubmit = function(e) {
-    e.preventDefault();
-    const riga = document.getElementById('edit-list-riga').value;
-    const cat = document.getElementById('edit-list-cat').value;
-    const p1n = document.getElementById('edit-list-p1num').value;
-    const p1p = document.getElementById('edit-list-p1pr').value;
-    const p2n = document.getElementById('edit-list-p2num').value;
-    const p2p = document.getElementById('edit-list-p2pr').value;
-    const p3n = document.getElementById('edit-list-p3num').value;
-    const p3p = document.getElementById('edit-list-p3pr').value;
-
-    callServer('salvaCategoriaListino', res => { editListinoModalObj.hide(); showGlobalAlert('success', res.message); caricaListiniIstruttore(); }, riga, cat, p1n, p1p, p2n, p2p, p3n, p3p);
-  };
-
-  function eliminaCategoriaListino(riga) {
-  // Rimuoviamo eventuali modali precedenti per evitare duplicati nel DOM
-  const oldModal = document.getElementById('customConfirmModal');
-  if (oldModal) oldModal.remove();
-
-  // Creiamo dinamicamente la struttura HTML del modale
-  const modalHtml = `
-    <div class="modal fade" id="customConfirmModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-          <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-            <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-              <i class="fa-solid fa-triangle-exclamation me-2"></i>Conferma Eliminazione
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4 text-center">
-            <div class="mb-3">
-              <i class="fa-regular fa-folder-closed text-danger" style="font-size: 3rem;"></i>
-            </div>
-            <p class="text-dark fw-semibold mb-1" style="font-size: 1rem;">Eliminare categoria listino?</p>
-            <p class="text-muted small mb-0">La categoria selezionata verrà rimossa definitivamente.</p>
-          </div>
-          <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-center gap-2">
-            <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal" style="font-size: 0.9rem;">Annulla</button>
-            <button type="button" id="btnConfirmDelete" class="btn rounded-pill px-4 fw-bold text-white" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); font-size: 0.9rem; border: none;">Sì, elimina</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Iniettiamo il modale nel body
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  
-  const modalElement = document.getElementById('customConfirmModal');
-  const bootstrapModal = new bootstrap.Modal(modalElement);
-  bootstrapModal.show();
-
-  // Gestione del click sul pulsante di conferma effettivo
-  document.getElementById('btnConfirmDelete').onclick = function() {
-    bootstrapModal.hide();
-    
-    callServer('eliminaCategoriaListino', res => { 
-      if (typeof showGlobalAlert === 'function') {
-        showGlobalAlert('success', res.message); 
-      }
-      if (typeof caricaListiniIstruttore === 'function') {
-        caricaListiniIstruttore(); 
-      }
-    }, riga);
-  };
-
-  // Pulizia del DOM alla chiusura del modale
-  modalElement.addEventListener('hidden.bs.modal', function () {
-    modalElement.remove();
-  });
-}
-
-  // --- CALENDARIO VISUALIZZAZIONE ---
-  function getMonday(d) {
-    d = new Date(d);
-    const day = d.getDay();
-    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-    const monday = new Date(d.setDate(diff));
-    monday.setHours(0,0,0,0);
-    return monday;
-  }
-  function caricaLezioniServer() {
-    callServer('getLezioni', data => { tutteLezioni = data; renderSettimana(); });
-  }
-  function changeWeek(dir) {
-    currentWeekStartDate.setDate(currentWeekStartDate.getDate() + (dir * 7));
-    selectedDateIso = null;
-    renderSettimana();
-  }
-  function clearDayFilter() { selectedDateIso = null; renderSettimana(); }
-  function renderSettimana() {
-    const daysStrip = document.getElementById('days-strip-container');
-    daysStrip.innerHTML = '';
-    const weekDaysNames = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
-    const endWeekDate = new Date(currentWeekStartDate);
-    endWeekDate.setDate(endWeekDate.getDate() + 6);
-    document.getElementById('week-display-label').innerText = `${currentWeekStartDate.toLocaleDateString('it-IT', {month:'short', day:'numeric'})} - ${endWeekDate.toLocaleDateString('it-IT', {month:'short', day:'numeric'})}`;
-
-    for (let i = 0; i < 7; i++) {
-      const dayDate = new Date(currentWeekStartDate);
-      dayDate.setDate(dayDate.getDate() + i);
-      const isoStr = `${dayDate.getFullYear()}-${String(dayDate.getMonth() + 1).padStart(2, '0')}-${String(dayDate.getDate()).padStart(2, '0')}`;
-      const hasEvents = tutteLezioni.some(l => l.dataIso === isoStr);
-      daysStrip.innerHTML += `<div class="day-pill ${hasEvents ? 'has-events' : ''} ${selectedDateIso === isoStr ? 'active' : ''}" onclick="selectDay('${isoStr}')">
-        <span class="day-name">${weekDaysNames[i]}</span>
-        <span class="day-num">${dayDate.getDate()}</span>
-        <span class="has-events-dot"></span>
-      </div>`;
-    }
-    renderListaLezioni();
-  }
-  function selectDay(isoStr) {
-    selectedDateIso = (selectedDateIso === isoStr) ? null : isoStr;
-    renderSettimana();
-  }
-function renderListaLezioni() {
-    const container = document.getElementById('lezioni-list-container');
-    container.innerHTML = '';
-    const startIso = formatDateToIso(currentWeekStartDate);
-    const endWeek = new Date(currentWeekStartDate);
-    endWeek.setDate(endWeek.getDate() + 6);
-    const endIso = formatDateToIso(endWeek);
-
-    let filtrate = tutteLezioni.filter(l => selectedDateIso ? l.dataIso === selectedDateIso : (l.dataIso >= startIso && l.dataIso <= endIso));
-    if (filtrate.length === 0) {
-      container.innerHTML = '<div class="text-center py-5 text-muted small"><i class="fa-regular fa-calendar-xmark fa-2x mb-2"></i><br>Nessuna lezione in programma.</div>';
-      return;
-    }
-    filtrate.sort((a, b) => a.oraInizio.localeCompare(b.oraInizio));
-    
-    const oraCorrente = new Date();
-
-    filtrate.forEach(l => {
-      const perc = l.postiMassimi > 0 ? Math.min(100, (l.postiPrenotati / l.postiMassimi) * 100) : 0;
-      
-      // Controllo se la data e l'ora della lezione sono già passate
-      const dataLezione = new Date(`${l.dataIso}T${l.oraInizio || '00:00'}:00`);
-      const ePassata = dataLezione < oraCorrente;
-      const nonDisponibile = l.esaurito || ePassata;
-      
-      // Recupero dei pacchetti basato sulla categoria della lezione
-      let pacchettiHtml = '';
-      const p = (typeof listiniMappa !== 'undefined' && listiniMappa[l.categoria]) ? listiniMappa[l.categoria] : l.pacchetti;
-
-      if (p) {
-        if (p.num1 && p.prezzo1) pacchettiHtml += `<span class="badge bg-light text-dark border me-1 mb-1">${p.num1} lez: €${p.prezzo1}</span>`;
-        if (p.num2 && p.prezzo2) pacchettiHtml += `<span class="badge bg-light text-dark border me-1 mb-1">${p.num2} lez: €${p.prezzo2}</span>`;
-        if (p.num3 && p.prezzo3) pacchettiHtml += `<span class="badge bg-light text-dark border me-1 mb-1">${p.num3} lez: €${p.prezzo3}</span>`;
-      } else {
-        pacchettiHtml = '<span class="text-muted small">Tariffe non disponibili</span>';
-      }
-
-      // Definizione testo ed etichetta di stato in base a se è passata o esaurita
-      let statoBadge = '';
-      let testoBottone = '';
-      if (ePassata) {
-        statoBadge = '<span class="badge-status bg-secondary text-white">Passata</span>';
-        testoBottone = 'Lezione Passata';
-      } else if (l.esaurito) {
-        statoBadge = '<span class="badge-status badge-full">Esaurito</span>';
-        testoBottone = 'Posti Esauriti';
-      } else {
-        statoBadge = '<span class="badge-status badge-available">Disponibile</span>';
-        testoBottone = 'Prenota Ora';
-      }
-
-      container.innerHTML += `<div class="lezione-card ${nonDisponibile ? 'full-booked' : ''}">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <div>
-            <h6 class="fw-bold text-dark mb-1">${l.nome}</h6>
-            <span class="text-muted small"><i class="fa-regular fa-clock me-1"></i>${l.dataFormatted} (${l.oraInizio} - ${l.oraFine})</span>
-          </div>
-          ${statoBadge}
-        </div>
-        <div class="mb-3"><a href="${l.mapsUrl}" target="_blank" class="maps-link"><i class="fa-solid fa-location-dot text-danger"></i>${l.luogo}</a></div>
-        
-        <div class="mb-3 p-2 rounded bg-light border">
-          <div class="fw-semibold text-dark small mb-1"><i class="fa-solid fa-ticket me-1 text-purple"></i>Pacchetti e Tariffe:</div>
-          <div class="d-flex flex-wrap">${pacchettiHtml}</div>
-        </div>
-
-        <div class="mb-3">
-          <div class="d-flex justify-content-between align-items-center small text-muted"><span>Posti occupati</span><span class="fw-bold">${l.postiPrenotati} / ${l.postiMassimi}</span></div>
-          <div class="seats-progress"><div class="seats-progress-fill ${nonDisponibile ? 'full' : ''}" style="width: ${perc}%"></div></div>
-        </div>
-        
-        <button class="btn btn-prenota" ${nonDisponibile ? 'disabled' : ''} onclick="apriModalPrenotazione('${l.id}', '${l.nome}', '${l.dataFormatted}', '${l.oraInizio}')">${testoBottone}</button>
-      </div>`;
-    });
-}
-  function formatDateToIso(d) {
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-  }
-function showGlobalAlert(type, message) {
-  let alertModalEl = document.getElementById('global-alert');
-  
-  if (!alertModalEl) {
-    console.warn("Modale alert non trovata nel DOM, la creo dinamicamente.");
-    alertModalEl = document.createElement('div');
-    alertModalEl.className = 'modal fade';
-    alertModalEl.id = 'global-alert';
-    alertModalEl.tabIndex = '-1';
-    alertModalEl.setAttribute('aria-hidden', 'true');
-    alertModalEl.innerHTML = `
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content shadow-lg border-0 rounded-4 overflow-hidden">
-          <div id="global-alert-header" class="modal-header border-0 py-3 px-4 text-white" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%);">
-            <h5 class="modal-title fw-bold d-flex align-items-center gap-2" id="globalAlertLabel">
-              <span id="global-alert-icon">ℹ️</span> <span id="global-alert-title">Notifica</span>
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body fs-6 py-4 px-4 text-secondary" id="global-alert-msg"></div>
-          <div class="modal-footer border-0 pt-0 pb-3 px-4">
-            <button type="button" id="global-alert-btn" class="btn w-100 py-2 fw-semibold rounded-3 text-white" style="background-color: #FF64AE;" data-bs-dismiss="modal">Capito</button>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(alertModalEl);
-  }
-
-  const headerEl = document.getElementById('global-alert-header');
-  const titleEl = document.getElementById('global-alert-title');
-  const iconEl = document.getElementById('global-alert-icon');
-  const msgEl = document.getElementById('global-alert-msg');
-  const btnEl = document.getElementById('global-alert-btn');
-
-  // Impostiamo il testo del messaggio
-  if (msgEl) msgEl.innerHTML = message;
-
-  // Header e bottoni rimangono sempre coordinati col viola della web app
-  headerEl.style.background = 'linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%)';
-  if (btnEl) btnEl.style.backgroundColor = '#FF64AE';
-
-  // Differenziamo solo il testo e l'icona in base al tipo
-  if (type === 'success') {
-    titleEl.innerText = "Successo";
-    iconEl.innerText = "✅";
-  } else if (type === 'danger' || type === 'error') {
-    titleEl.innerText = "Attenzione";
-    iconEl.innerText = "⚠️";
-  } else {
-    titleEl.innerText = "Avviso";
-    iconEl.innerText = "ℹ️";
-  }
-
-  // Mostriamo la modale
-  let myModal = bootstrap.Modal.getInstance(alertModalEl);
-  if (!myModal) {
-    myModal = new bootstrap.Modal(alertModalEl);
-  }
-  myModal.show();
-}
-
-  function switchSubTabMie(type) {
-    const btnLogin = document.getElementById('btn-subtab-login');
-    const btnRegister = document.getElementById('btn-subtab-register');
-    const formLogin = document.getElementById('form-subtab-login');
-    const formRegister = document.getElementById('form-subtab-register');
-
-    if (type === 'login') {
-      btnLogin.style.backgroundColor = 'var(--primary)';
-      btnLogin.style.color = 'white';
-      btnLogin.classList.remove('text-muted');
-      btnRegister.style.backgroundColor = 'transparent';
-      btnRegister.style.color = '';
-      btnRegister.classList.add('text-muted');
-      formLogin.style.display = 'block';
-      formRegister.style.display = 'none';
-    } else {
-      btnRegister.style.backgroundColor = 'var(--primary)';
-      btnRegister.style.color = 'white';
-      btnRegister.classList.remove('text-muted');
-      btnLogin.style.backgroundColor = 'transparent';
-      btnLogin.style.color = '';
-      btnLogin.classList.add('text-muted');
-      formLogin.style.display = 'none';
-      formRegister.style.display = 'block';
-    }
-    generaCaptcha();
-  }
-
-  function eseguiRegistrazioneNuovoUtente(e) {
-    e.preventDefault();
-
-// 👉 CONTROLLO CAPTCHA
-  const userAnsw = parseInt(document.getElementById('captcha-input').value);
-  if (isNaN(userAnsw) || userAnsw !== expectedCaptchaResult) {
-    showGlobalAlert('danger', '⚠️ Risposta alla verifica di sicurezza errata. Riprova!');
-    generaCaptcha(); // Genera una nuova somma per sicurezza
-    return; // Interrompe l'esecuzione e non invia nulla
-  }
-
-
-
-    const nome = document.getElementById('reg-tab-nome').value;
-    const cognome = document.getElementById('reg-tab-cognome').value;
-    const tel = document.getElementById('reg-tab-tel').value;
-    const email = document.getElementById('reg-tab-email').value;
-
-    callServer('registraNuovoUtenteInTab', res => {
-      if (res.success) {
-        showGlobalAlert('success', res.message);
-        document.getElementById('form-nuovo-utente').reset();
-        switchSubTabMie('login');
-      } else {
-        showGlobalAlert('danger', res.message);
-      }
-    }, nome, cognome, tel, email);
-  }
-
-
-  function apriModalWhatsAppGroup(l) {
-  // Rimuoviamo eventuali modali precedenti
-  const oldModal = document.getElementById('whatsappGroupModal');
-  if (oldModal) oldModal.remove();
-
-  // Template del messaggio per il gruppo
-  const messaggioDefault = `🔔 *PROMEMORIA LEZIONE* 🔔\n\n` +
-    `🗓 *${l.nome || 'Lezione'}*\n` +
-    `📅 Data: ${l.dataFormatted || ''}\n` +
-    `⏰ Orario: ${l.oraInizio || ''} - ${l.oraFine || ''}\n` +
-    `📍 Luogo: ${l.luogo || 'N/D'}\n\n` +
-    `Vi aspettiamo! Ricordate di confermare o disdire per tempo in caso di imprevisti.`;
-
-  const modalHtml = `
-    <div class="modal fade" id="whatsappGroupModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-          <div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">
-            <h5 class="modal-title fw-bold" style="font-size: 1.1rem;">
-              <i class="fa-brands fa-whatsapp me-2"></i>Messaggio Gruppo WhatsApp
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body p-4">
-            <p class="text-muted small mb-2">Puoi modificare il testo qui sotto prima di inviarlo:</p>
-            <textarea id="whatsappTextContent" class="form-control border shadow-sm" rows="8" style="border-radius: 12px; font-size: 0.9rem; resize: none;">${messaggioDefault}</textarea>
-          </div>
-          <div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-between">
-            <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal" style="font-size: 0.9rem;">Annulla</button>
-            <div class="d-flex gap-2">
-              <button type="button" class="btn btn-outline-secondary rounded-pill px-3 fw-bold" style="font-size: 0.9rem;" onclick="copiaTestoWhatsApp()">
-                <i class="fa-solid fa-copy me-1"></i> Copia
-              </button>
-              <a id="btnInviaWaLink" href="#" target="_blank" class="btn rounded-pill px-4 fw-bold text-white text-decoration-none d-flex align-items-center" style="background: #25D366; font-size: 0.9rem; border: none;" onclick="inviaWhatsAppGruppo()">
-                <i class="fa-brands fa-whatsapp me-1 fs-6"></i> Invia
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.body.insertAdjacentHTML('beforeend', modalHtml);
-  const modalElement = document.getElementById('whatsappGroupModal');
-  const bootstrapModal = new bootstrap.Modal(modalElement);
-  bootstrapModal.show();
-
-  modalElement.addEventListener('hidden.bs.modal', function () {
-    modalElement.remove();
-  });
-}
-
-function copiaTestoWhatsApp() {
-  const textarea = document.getElementById('whatsappTextContent');
-  textarea.select();
-  textarea.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(textarea.value).then(() => {
-    alert("✅ Testo copiato negli appunti!");
-  });
-}
-
-function inviaWhatsAppGruppo() {
-  const testo = document.getElementById('whatsappTextContent').value;
-  const urlEncoded = encodeURIComponent(testo);
-  const whatsappUrl = `https://wa.me/?text=${urlEncoded}`;
-  
-  // Apre la condivisione WhatsApp
-  window.open(whatsappUrl, '_blank');
-}
-
-
-function apriModalWhatsAppUtente(u) {
-  var oldModal = document.getElementById('whatsappUserModal');
-  if (oldModal) oldModal.remove();
-
-  var telPulito = u.telefono ? String(u.telefono).replace(/[^0-9+]/g, '') : '';
-  var nomeUtente = u.nome || '';
-  var cognomeUtente = u.cognome || '';
-
-  var messaggioDefault = "👋 Ciao *" + nomeUtente + "*,\n\n" +
-    "Ti scriviamo dalla gestione corsi per aggiornamenti relativi alle tue lezioni e ai pacchetti attivi.\n\n" +
-    "📞 Restiamo a disposizione per qualsiasi informazione o per prenotare le tue prossime sessioni!\n\n" +
-    "A presto! ✨";
-
-  var modalDiv = document.createElement('div');
-  modalDiv.className = 'modal fade';
-  modalDiv.id = 'whatsappUserModal';
-  modalDiv.tabIndex = '-1';
-  modalDiv.setAttribute('aria-hidden', 'true');
-
-  modalDiv.innerHTML = 
-    '<div class="modal-dialog modal-dialog-centered">' +
-      '<div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">' +
-        '<div class="modal-header border-0 pb-0" style="background: linear-gradient(135deg, #FF64AE 0%, #FF58A1 100%); color: white; padding: 20px;">' +
-          '<h5 class="modal-title fw-bold" style="font-size: 1.1rem;"><i class="fa-brands fa-whatsapp me-2"></i>Contatta ' + nomeUtente + ' ' + cognomeUtente + '</h5>' +
-          '<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>' +
-        '</div>' +
-        '<div class="modal-body p-4">' +
-          '<div class="mb-3">' +
-            '<label class="form-label small text-muted fw-bold">Numero di Telefono:</label>' +
-            '<input type="text" id="whatsappUserTel" class="form-control border shadow-sm" value="' + telPulito + '" style="border-radius: 10px; font-size: 0.9rem;" placeholder="Inserisci il numero con prefisso (es. +39...)">' +
-          '</div>' +
-          '<div>' +
-            '<label class="form-label small text-muted fw-bold">Messaggio:</label>' +
-            '<textarea id="whatsappUserText" class="form-control border shadow-sm" rows="6" style="border-radius: 12px; font-size: 0.9rem; resize: none;"></textarea>' +
-          '</div>' +
-        '</div>' +
-        '<div class="modal-footer border-0 pt-0 pb-3 px-4 justify-content-between">' +
-          '<button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal" style="font-size: 0.9rem;">Annulla</button>' +
-          '<div class="d-flex gap-2">' +
-            '<button type="button" id="btnCopiaWa" class="btn btn-outline-secondary rounded-pill px-3 fw-bold" style="font-size: 0.9rem;"><i class="fa-solid fa-copy me-1"></i> Copia</button>' +
-            '<button type="button" id="btnInviaWa" class="btn rounded-pill px-4 fw-bold text-white d-flex align-items-center" style="background: #25D366; font-size: 0.9rem; border: none;"><i class="fa-brands fa-whatsapp me-1 fs-6"></i> Invia Chat</button>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-
-  document.body.appendChild(modalDiv);
-
-  var textAreaEl = document.getElementById('whatsappUserText');
-  if (textAreaEl) textAreaEl.value = messaggioDefault;
-
-  var btnCopia = document.getElementById('btnCopiaWa');
-  if (btnCopia) btnCopia.onclick = copiaTestoWhatsAppUtente;
-
-  var btnInvia = document.getElementById('btnInviaWa');
-  if (btnInvia) btnInvia.onclick = inviaWhatsAppSingolo;
-
-  var bootstrapModal = new bootstrap.Modal(modalDiv);
-  bootstrapModal.show();
-
-  modalDiv.addEventListener('hidden.bs.modal', function () {
-    modalDiv.remove();
-  });
-}
-
-function copiaTestoWhatsAppUtente() {
-  var textarea = document.getElementById('whatsappUserText');
-  if (!textarea) return;
-  textarea.select();
-  textarea.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(textarea.value).then(function() {
-    alert("✅ Testo copiato negli appunti!");
-  });
-}
-
-function inviaWhatsAppSingolo() {
-  var telInput = document.getElementById('whatsappUserTel');
-  var textInput = document.getElementById('whatsappUserText');
-  
-  if (!telInput || !textInput) return;
-
-  var tel = telInput.value.trim();
-  var testo = textInput.value;
-
-  if (!tel) {
-    alert("⚠️ Inserisci un numero di telefono valido per procedere.");
-    return;
-  }
-
-  var urlEncoded = encodeURIComponent(testo);
-  var whatsappUrl = "https://wa.me/" + tel + "?text=" + urlEncoded;
-  window.open(whatsappUrl, '_blank');
-}
-// Variabile globale per memorizzare il risultato corretto
-let expectedCaptchaResult = 0;
-
-function generaCaptcha() {
-  const num1 = Math.floor(Math.random() * 10) + 1; // Numero da 1 a 10
-  const num2 = Math.floor(Math.random() * 10) + 1; // Numero da 1 a 10
-  
-  expectedCaptchaResult = num1 + num2;
-  
-  const questionEl = document.getElementById('captcha-question');
-  if (questionEl) {
-    questionEl.innerText = `Quanto fa ${num1} + ${num2}?`;
-  }
-  
-  const inputEl = document.getElementById('captcha-input');
-  if (inputEl) {
-    inputEl.value = ''; // Pulisce il campo
-  }
-}
-
-// Da richiamare quando apri la modale di registrazione dell'utente
-function apriFormRegistrazione() {
-  generaCaptcha(); // Genera una nuova domanda ogni volta che il form viene aperto
-  // ... qui richiami il codice esistente che apre la tua modale di registrazione ...
-}
-
-// Funzione di controllo da eseguire al click su "Registrati"
-function validaEInviaRegistrazione() {
-  const userAnsw = parseInt(document.getElementById('captcha-input').value);
-  
-  if (isNaN(userAnsw) || userAnsw !== expectedCaptchaResult) {
-    showGlobalAlert('danger', '⚠️ Risposta alla verifica di sicurezza errata. Riprova!');
-    generaCaptcha(); // Genera una nuova domanda per sicurezza
-    return false; // Blocca l'invio
-  }
-  
-  // Se il captcha è corretto, procedi con la chiamata a Google Apps Script
-  return true;
-}
-function eseguiCambioPassword() {
-  const vecchiaPass = document.getElementById('settings-old-pass').value;
-  const nuovaPass = document.getElementById('settings-new-pass').value;
-  const msgDiv = document.getElementById('settings-pass-msg');
-
-  if (!vecchiaPass || !nuovaPass) {
-    msgDiv.style.display = 'block';
-    msgDiv.className = 'small mt-2 text-danger';
-    msgDiv.innerText = 'Compila entrambi i campi.';
-    return;
-  }
-
-  google.script.run
-    .withSuccessHandler(function(risultato) {
-      msgDiv.style.display = 'block';
-      if (risultato.success) {
-        msgDiv.className = 'small mt-2 text-success';
-        document.getElementById('settings-old-pass').value = '';
-        document.getElementById('settings-new-pass').value = '';
-      } else {
-        msgDiv.className = 'small mt-2 text-danger';
-      }
-      msgDiv.innerText = risultato.message;
-    })
-    .cambiaPasswordIstruttore(vecchiaPass, nuovaPass);
-}
-
 </script>
 </body>
 </html>
